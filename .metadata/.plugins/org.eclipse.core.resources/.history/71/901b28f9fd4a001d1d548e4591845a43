@@ -97,18 +97,14 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  GPIO_PinState EXT_Btn_State, EXT_Btn_StatePrev = GPIO_PIN_SET;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	EXT_Btn_State = HAL_GPIO_ReadPin(EXT_Btn_GPIO_Port, EXT_Btn_Pin);
-	if(EXT_Btn_State == GPIO_PIN_RESET && EXT_Btn_StatePrev == GPIO_PIN_SET)
-		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-	EXT_Btn_StatePrev = EXT_Btn_State;
-	HAL_Delay(100);
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }

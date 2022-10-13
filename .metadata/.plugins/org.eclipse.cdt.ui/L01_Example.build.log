@@ -1,10 +1,10 @@
-14:50:38 **** Incremental Build of configuration Debug for project L01_Example ****
+15:50:32 **** Incremental Build of configuration Debug for project L01_Example ****
 make -j12 all 
 arm-none-eabi-size   L01_Example.elf 
    text	   data	    bss	    dec	    hex	filename
-  11288	     20	   1708	  13016	   32d8	L01_Example.elf
+  11524	     20	   1708	  13252	   33c4	L01_Example.elf
 Finished building: default.size.stdout
  
 
-14:50:38 Build Finished. 0 errors, 0 warnings. (took 447ms)
+15:50:32 Build Finished. 0 errors, 0 warnings. (took 237ms)
 

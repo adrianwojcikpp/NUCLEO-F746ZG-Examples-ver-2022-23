@@ -62,10 +62,8 @@ void SystemClock_Config(void);
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(GPIO_Pin == EXT1_Btn_Pin)
-	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET);
-  if(GPIO_Pin == EXT2_Btn_Pin)
-	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
+  if(GPIO_Pin == USER_Btn_Pin)
+	  HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
 }
 /* USER CODE END 0 */
 
@@ -99,7 +97,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  GPIO_PinState EXT_Btn_State, EXT_Btn_StatePrev = GPIO_PIN_SET;
   /* USER CODE END 2 */
 
   /* Infinite loop */

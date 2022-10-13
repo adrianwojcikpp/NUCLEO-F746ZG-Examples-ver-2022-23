@@ -87,19 +87,24 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  GPIO_PinState USER_Btn_State, USER_Btn_StatePrev = GPIO_PIN_RESET;
+  GPIO_TypeDef* LD_GPIO_Ports[] = { LD1_GPIO_Port, LD2_GPIO_Port, LD3_GPIO_Port };
+  uint16_t LD_Pins[] = { LD1_Pin, LD2_Pin, LD3_Pin };
+  GPIO_PinState LD_States[] = { GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_RESET };
+  const int LD_N = 3;
+  int LD_cnt = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	USER_Btn_State = HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin);
-	if(USER_Btn_State == GPIO_PIN_SET && USER_Btn_StatePrev == GPIO_PIN_RESET)
-		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-	USER_Btn_StatePrev = USER_Btn_State;
+	memset(LD_States, GPIO_PIN_RESET, LD_N);
+	LD_cnt = (LD_cnt + 1) % LD_N;
+	LD_States[LD_cnt] = GPIO_PIN_SET;
+	for(int i = 0; i < LD_N; i++)
+		HAL_GPIO_WritePin(LD_GPIO_Ports[i], LD_Pins[i], LD_States[i]);
 	HAL_Delay(100);
-	/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }

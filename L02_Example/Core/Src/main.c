@@ -27,6 +27,7 @@
 #include <string.h>
 #include "led_config.h"
 #include "btn_config.h"
+#include "serial_api_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,6 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+char msg[] = "LDxx";
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,9 +59,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-char msg;
-
 /**
   * @brief  Rx Transfer completed callback.
   * @param  huart UART handle.
@@ -69,22 +68,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &huart3)
   {
-	HAL_UART_Transmit_IT(huart, (uint8_t*)&msg, 1);
+	  int leds_len = sizeof(hleds) / sizeof(hleds[0]);
+	  SERIAL_API_LED_ReadMsg(msg, hleds, leds_len);
+	  for(int i = 0; i < leds_len; i++)
+	  {
+		  LED_GPIO_Write(hleds[i].Led, hleds[i].State);
+	  }
+	  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   }
 }
 
-/**
-  * @brief Tx Transfer completed callback.
-  * @param huart UART handle.
-  * @retval None
-  */
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
-  if(huart == &huart3)
-  {
-    HAL_UART_Receive_IT(huart, (uint8_t*)&msg, 1);
-  }
-}
 
 /* USER CODE END 0 */
 
@@ -118,7 +111,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart3, (uint8_t*)&msg, 1);
+  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   /* USER CODE END 2 */
 
   /* Infinite loop */

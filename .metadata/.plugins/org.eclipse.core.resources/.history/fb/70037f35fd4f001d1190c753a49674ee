@@ -1,0 +1,69 @@
+/**
+  ******************************************************************************
+  * @file		: led.c
+  * @author  	: AW		Adrian.Wojcik@put.poznan.pl
+  * @version 	: 1.3.0
+  * @date    	: Oct 19, 2022
+  * @brief   	: Single-color LED components driver
+  *
+  ******************************************************************************
+  */
+
+/* Private includes ----------------------------------------------------------*/
+#include "led.h"
+
+/* Private typedef -----------------------------------------------------------*/
+
+/* Private define ------------------------------------------------------------*/
+
+/* Private macro -------------------------------------------------------------*/
+
+/* Private variables ---------------------------------------------------------*/
+
+/* Public variables ----------------------------------------------------------*/
+
+/* Private function prototypes -----------------------------------------------*/
+
+/* Public function prototypes ------------------------------------------------*/
+
+/* Private functions ---------------------------------------------------------*/
+
+/* Public functions ----------------------------------------------------------*/
+/**
+  * @brief Turns LED on
+  * @param[in] hled		: LED handler
+  * @retval None
+  */
+void LED_GPIO_On(const LED_Handle_TypeDef* hled)
+{
+	hled->
+}
+
+/**
+  * @brief Turns LED off
+  * @param[in] hled		: LED handler
+  * @retval None
+  */
+void LED_GPIO_Off(const LED_Handle_TypeDef* hled);
+
+/**
+  * @brief Toggles LED state
+  * @param[in] hled		: LED handler
+  * @retval None
+  */
+void LED_GPIO_Toggle(const LED_Handle_TypeDef* hled);
+
+/**
+  * @brief Writes given LED state
+  * @param[in] hled		: LED handler
+  * @param[in] state 	: LED state (LED_OFF or LED_ON)
+  * @retval None
+  */
+void LED_GPIO_Write(const LED_Handle_TypeDef* hled, LED_State_TypeDef state);
+
+/**
+  * @brief Writes given LED state
+  * @param[in] hled		: LED handler
+  * @retval	LED state (LED_OFF or LED_ON)
+  */
+LED_State_TypeDef LED_GPIO_Write(const LED_Handle_TypeDef* hled);

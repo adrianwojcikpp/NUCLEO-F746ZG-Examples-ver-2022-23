@@ -1,0 +1,8 @@
+../Components/Src/led.c:37:6:__led_gpio_write	16	static
+../Components/Src/led.c:47:6:__led_gpio_toggle	16	static
+../Components/Src/led.c:57:7:__led_gpio_read	16	static
+../Components/Src/led.c:70:6:LED_GPIO_On	16	static
+../Components/Src/led.c:80:6:LED_GPIO_Off	16	static
+../Components/Src/led.c:90:6:LED_GPIO_Toggle	16	static
+../Components/Src/led.c:101:6:LED_GPIO_Write	16	static
+../Components/Src/led.c:111:24:LED_GPIO_Read	24	static

@@ -90,44 +90,15 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  unsigned int btn1_cnt = 0;
+  char msg;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if(BTN_GPIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
-    {
-      // Increment counter
-      btn1_cnt++;
-      // Format message string
-      char msg[32];
-      int msg_len = sprintf(msg, "BTN1 Counter: %d \r\n", btn1_cnt);
-      // Send message
-      if(HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 10) == HAL_OK)
-      {
-        LED_GPIO_On(&hld4);
-      }
-
-	  int t_on = 100; // [ms]
-
-	  LED_GPIO_On(&hld1);
-	  HAL_Delay(t_on);
-	  LED_GPIO_Off(&hld1);
-
-	  LED_GPIO_On(&hld2);
-	  HAL_Delay(t_on);
-	  LED_GPIO_Off(&hld2);
-
-	  LED_GPIO_On(&hld3);
-	  HAL_Delay(t_on);
-	  LED_GPIO_Off(&hld3);
-
-	  LED_GPIO_Off(&hld4);
-    }
-    else
-      HAL_Delay(10);
+    if(HAL_UART_Receive(&huart3, (uint8_t*)&msg, 1, 0xffff) == HAL_OK)
+    	HAL_UART_Transmit(&huart3, (uint8_t*)&msg, 1, 10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

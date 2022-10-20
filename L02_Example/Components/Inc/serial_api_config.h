@@ -18,7 +18,13 @@
 /* Public typedef ------------------------------------------------------------*/
 
 /* Public define -------------------------------------------------------------*/
+
+
+#ifdef SERIAL_API_JSON
+#define SERIAL_API_LED_MSG_LEN 100
+#else
 #define SERIAL_API_LED_MSG_LEN 4
+#endif
 
 /* Public macro --------------------------------------------------------------*/
 

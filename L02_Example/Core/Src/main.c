@@ -48,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char msg[] = "LDxx";
+char msg[SERIAL_API_LED_MSG_LEN + 1] = { 0, };
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,13 +68,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &huart3)
   {
-	  int leds_len = sizeof(hleds) / sizeof(hleds[0]);
-	  SERIAL_API_LED_ReadMsg(msg, hleds, leds_len);
-	  for(int i = 0; i < leds_len; i++)
-	  {
-		  LED_GPIO_Write(hleds[i].Led, hleds[i].State);
-	  }
-	  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
+	int leds_len = sizeof(hleds) / sizeof(hleds[0]);
+	int status = SERIAL_API_LED_ReadMsg(msg, hleds, leds_len);
+
+	if(status < 0)
+      LED_GPIO_On(&hld4);
+	else
+	  LED_GPIO_Off(&hld4);
+
+	for(int i = 0; i < leds_len; i++)
+	  LED_GPIO_Write(hleds[i].Led, hleds[i].State);
+
+	HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   }
 }
 

@@ -27,18 +27,32 @@ typedef struct {
 } SERIAL_API_LED_TypeDef;
 
 /* Public define -------------------------------------------------------------*/
+#define SERIAL_API_JSON
 
 /* Public macro --------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
 
 /* Public function prototypes ------------------------------------------------*/
+
+#ifdef SERIAL_API_JSON
 /**
  * @brief Serial API LED control message reading
  * @param[in] 	  msg		: Input message
  * @param[in/out] leds		: Serial API LED control structure array
  * @param[in] 	  leds_n	: Serial API LED control structure array length
+ * @retval Parsing status: 0 if successful, <0 otherwise
+ */
+int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_n);
+#else
+/**
+ * @brief Serial API LED control message reading
+ * @param[in] 	  msg		: Input message
+ * @param[in/out] leds		: Serial API LED control structure array
+ * @param[in] 	  leds_n	: Serial API LED control structure array length
+ * @retval None
  */
 void SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_n);
+#endif
 
 #endif /* INC_SERIAL_API_H_ */

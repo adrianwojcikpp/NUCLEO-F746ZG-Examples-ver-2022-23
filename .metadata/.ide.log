@@ -2597,3 +2597,19 @@
 2022-10-20 00:37:45,355 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
 2022-10-20 00:37:45,355 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
 2022-10-20 01:19:20,344 [INFO] Gpio:272 - dependency for GPIO [RCC, SYS, USART3]
+2022-10-20 12:41:57,326 [INFO] Activator:177 - 
+
+
+2022-10-20 12:41:57,326 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-20 12:42:06,322 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:06,322 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:06,322 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:19,076 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:19,076 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:19,076 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:27,664 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2022-10-20 12:42:27,664 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2022-10-20 12:42:27,672 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2022-10-20 12:42:35,362 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:35,362 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 12:42:35,362 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com

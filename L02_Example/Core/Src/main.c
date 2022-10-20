@@ -23,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include <string.h>
 #include "led_config.h"
 #include "btn_config.h"
@@ -89,9 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  char msg[] = "Hello, Nucleo!\r\n";
-  if(HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), 10) == HAL_OK)
-    LED_GPIO_On(&hld1);
+  unsigned int btn1_cnt = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -100,6 +99,17 @@ int main(void)
   {
     if(BTN_GPIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
     {
+      // Increment counter
+      btn1_cnt++;
+      // Format message string
+      char msg[32];
+      int msg_len = sprintf(msg, "BTN1 Counter: %d \r\n", btn1_cnt);
+      // Send message
+      if(HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 10) == HAL_OK)
+      {
+        LED_GPIO_On(&hld4);
+      }
+
 	  int t_on = 100; // [ms]
 
 	  LED_GPIO_On(&hld1);
@@ -113,6 +123,8 @@ int main(void)
 	  LED_GPIO_On(&hld3);
 	  HAL_Delay(t_on);
 	  LED_GPIO_Off(&hld3);
+
+	  LED_GPIO_Off(&hld4);
     }
     else
       HAL_Delay(10);

@@ -119,20 +119,20 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    memset(msg, '\0', SERIAL_API_LED_MSG_LEN);
-    scanf("%s", msg);
+	memset(msg, '\0', SERIAL_API_LED_MSG_LEN);
+	scanf("%s", msg);
 
-    int hleds_len = sizeof(hleds) / sizeof(hleds[0]);
-    int status = SERIAL_API_LED_ReadMsg(msg, hleds, hleds_len);
+	int hleds_len = sizeof(hleds) / sizeof(hleds[0]);
+	int status = SERIAL_API_LED_ReadMsg(msg, hleds, hleds_len);
 
-    if(status == 0)
-    {
-      for(int i = 0; i < hleds_len; i++)
-        LED_GPIO_Write(hleds[i].Led, hleds[i].State);
-    }
+	if(status == 0)
+	{
+	  for(int i = 0; i < hleds_len; i++)
+	    LED_GPIO_Write(hleds[i].Led, hleds[i].State);
+	}
 
-    puts(msg);
-    puts("\r\n");
+	puts(msg);
+	puts("\r\n");
 
     /* USER CODE END WHILE */
 

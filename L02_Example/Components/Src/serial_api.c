@@ -10,6 +10,7 @@
   */
 
 /* Private includes ----------------------------------------------------------*/
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "serial_api.h"
@@ -66,15 +67,14 @@ _Bool __jsmn_tok_keyvalue_cmp(const char *json, jsmntok_t *tok, const char *str,
 
 /* Public functions ----------------------------------------------------------*/
 /**
- * @brief Serial API LED initialization
- */
-void SERIAL_API_Init(void)
-{
-	jsmn_init(&JSMN_PARSER);
-}
-
-/**
  * @brief Serial API LED control message reading
+ * @note Control message syntax: [{"id":"LDx","status":x}, ... ,{"id":"LDx","status":x}]
+ * 		 where x is either 0 (LED off) or 1 (LED on)
+ * 		 LEDs IDs: Green on-board LED       : LD1
+ * 		           Blue on-board LED        : LD2
+ * 		           Red on-board LED         : LD3
+ * 		           Blue THT bread-board LED : LD4
+ *
  * @param[in] 	  msg		: Input message
  * @param[in/out] leds		: Serial API LED control structure array
  * @param[in] 	  leds_len	: Serial API LED control structure array's length
@@ -82,17 +82,18 @@ void SERIAL_API_Init(void)
  */
 int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_len)
 {
+	jsmn_init(&JSMN_PARSER);
 	int r = jsmn_parse(&JSMN_PARSER, msg, strlen(msg), JSMN_TOK, sizeof(JSMN_TOK) / sizeof(JSMN_TOK[0]));
 
 	if(r < 6)
 	{
-		//puts("Incorrect message syntax [0].");
+		puts("Incorrect message syntax [1: Too few JSON tokens].\r\n");
 		return -1;
 	}
 
 	if(JSMN_TOK[0].type != JSMN_ARRAY)
 	{
-		//puts("Incorrect message syntax [1].");
+		puts("Incorrect message syntax [2: An array was expected].\r\n");
 		return -2;
 	}
 	const int len = JSMN_TOK[0].size;
@@ -103,12 +104,12 @@ int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int le
 		int size = JSMN_TOK[i].size * 2 + 1;
 		if(JSMN_TOK[i].type != JSMN_OBJECT)
 		{
-			//puts("Incorrect message syntax [2].");
+			puts("Incorrect message syntax [3: An array of objects was expected].\r\n");
 			return -3;
 		}
 		else if(JSMN_TOK[i].size != LED_CTRL_OBJ_SIZE)
 		{
-			//puts("Incorrect message syntax [3].");
+			puts("Incorrect message syntax [4: Incorrect object size].\r\n");
 			return -4;
 		}
 
@@ -128,7 +129,7 @@ int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int le
 		}
 		else
 		{
-			//puts("Incorrect message syntax [4].");
+			puts("Incorrect message syntax [5: Can't find \"id\" or \"state\" keys].\r\n");
 			return -5;
 		}
 		for(int k = 0; k < leds_len; k++)

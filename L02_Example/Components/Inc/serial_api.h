@@ -35,11 +35,6 @@ typedef struct {
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief Serial API LED initialization
- */
-void SERIAL_API_Init(void);
-
-/**
  * @brief Serial API LED control message reading
  * @param[in] 	  msg		: Input message
  * @param[in/out] leds		: Serial API LED control structure array

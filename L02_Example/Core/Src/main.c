@@ -81,7 +81,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   }
 }
 
-
 /* USER CODE END 0 */
 
 /**
@@ -114,7 +113,6 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  SERIAL_API_Init();
   HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   /* USER CODE END 2 */
 

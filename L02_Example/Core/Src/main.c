@@ -68,18 +68,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart == &huart3)
   {
-	int leds_len = sizeof(hleds) / sizeof(hleds[0]);
-	int status = SERIAL_API_LED_ReadMsg(msg, hleds, leds_len);
+    int hleds_len = sizeof(hleds) / sizeof(hleds[0]);
+    int status = SERIAL_API_LED_ReadMsg(msg, hleds, hleds_len);
 
-	if(status < 0)
-      LED_GPIO_On(&hld4);
-	else
-	  LED_GPIO_Off(&hld4);
+    if(status == 0)
+    {
+       for(int i = 0; i < hleds_len; i++)
+         LED_GPIO_Write(hleds[i].Led, hleds[i].State);
+    }
 
-	for(int i = 0; i < leds_len; i++)
-	  LED_GPIO_Write(hleds[i].Led, hleds[i].State);
-
-	HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
+    HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   }
 }
 
@@ -116,6 +114,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+  SERIAL_API_Init();
   HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
   /* USER CODE END 2 */
 

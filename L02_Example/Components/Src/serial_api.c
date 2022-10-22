@@ -13,16 +13,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include "serial_api.h"
+#ifdef SERIAL_API_JSON
 #include "jsmn.h"
 
 /* Private typedef -----------------------------------------------------------*/
 
 /* Private define ------------------------------------------------------------*/
-#define LED_CTRL_OBJ_SIZE 2
+#define LED_CTRL_OBJ_SIZE 2 //<! { "id":"LDx","state":X}
 
 /* Private macro -------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+jsmn_parser JSMN_PARSER;
+jsmntok_t JSMN_TOK[64];
 
 /* Public variables ----------------------------------------------------------*/
 
@@ -31,80 +34,55 @@
 /* Public function prototypes ------------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
-
-#ifdef SERIAL_API_JSON
-
 /**
- * @brief TODO
- * @param[in] json :
- * @param[in] tok  :
- * @param[in] s    :
- * @retval
+ * @brief Comparison of a JSMN_STRING token to a C-string
+ * @param[in] json : JSON C-string (token data source)
+ * @param[in] tok  : JSMN token for comparison
+ * @param[in] str  : C-string for comparison
+ * @retval 1 if token content is the same as string, 0 otherwise
  */
-int json_eq(const char *json, jsmntok_t *tok, const char *s)
+_Bool __jsmn_tok_str_cmp(const char *json, jsmntok_t *tok, const char *str)
 {
 	_Bool is_string = (tok->type == JSMN_STRING);
-	_Bool is_len_eq = ((int)strlen(s) == tok->end - tok->start);
-	_Bool is_str_eq = (strncmp(json + tok->start, s, tok->end - tok->start) == 0);
-
-	if(is_string && is_len_eq && is_str_eq)
-		return 0;
-
-	return -1;
+	_Bool is_len_eq = ((int)strlen(str) == tok->end - tok->start);
+	_Bool is_str_eq = (strncmp(json + tok->start, str, tok->end - tok->start) == 0);
+	return is_string && is_len_eq && is_str_eq;
 }
 
 /**
- * @brief TODO
- * @param[in] json :
- * @param[in] tok  :
- * @param[in] s    :
- * @param[in] type :
- * @retval
+ * @brief Comparison of a C-string key and value JSMN type with JSMN tokens
+ * @param[in] json : JSON C-string (token data source)
+ * @param[in] tok  : JSMN token for comparison
+ * @param[in] str  : C-string for key comparison
+ * @param[in] type : JSMN token type for value type comparison
+ * @retval 1 if token is contains given key and next tokens have given JSMN type, <0 otherwise
  */
-_Bool json_check_key(const char *json, jsmntok_t *tok, const char *s, jsmntype_t type)
+_Bool __jsmn_tok_keyvalue_cmp(const char *json, jsmntok_t *tok, const char *str, jsmntype_t type)
 {
-	return json_eq(json, tok, s) == 0 && (tok+1)->type == type;
+	_Bool is_key_eq = __jsmn_tok_str_cmp(json, tok, str);
+	_Bool is_value_type_eq = ((tok+1)->type == type);
+	return is_key_eq && is_value_type_eq;
 }
-
-
-/**
- * @brief TODO
- * @param[in] type :
- * @retval
- */
-char* jsmn_type2name(jsmntype_t type)
-{
-	switch(type)
-	{
-		case JSMN_OBJECT:
-			return "OBJECT";
-		case JSMN_ARRAY:
-			return "ARRAY";
-		case JSMN_STRING:
-			return "STRING";
-		case JSMN_PRIMITIVE:
-			return "PRIMITIVE";
-		default:
-			return "UNDEFINED";
-	}
-}
-
 
 /* Public functions ----------------------------------------------------------*/
 /**
- * @brief TODO
- * @param[in]     msg   :
- * @param[in/out] leds  :
- * @param[in]     led_n :
- * @retval
+ * @brief Serial API LED initialization
  */
-int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int led_n)
+void SERIAL_API_Init(void)
 {
-	jsmn_parser p;
-	jsmntok_t t[32];
+	jsmn_init(&JSMN_PARSER);
+}
 
-	jsmn_init(&p);
-	int r = jsmn_parse(&p, msg, strlen(msg), t, sizeof(t) / sizeof(t[0]));
+/**
+ * @brief Serial API LED control message reading
+ * @param[in] 	  msg		: Input message
+ * @param[in/out] leds		: Serial API LED control structure array
+ * @param[in] 	  leds_len	: Serial API LED control structure array's length
+ * @retval Parsing status: 0 if successful, <0 otherwise
+ */
+int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_len)
+{
+	int r = jsmn_parse(&JSMN_PARSER, msg, strlen(msg), JSMN_TOK, sizeof(JSMN_TOK) / sizeof(JSMN_TOK[0]));
 
 	if(r < 6)
 	{
@@ -112,52 +90,55 @@ int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int le
 		return -1;
 	}
 
-	if(t[0].type != JSMN_ARRAY)
+	if(JSMN_TOK[0].type != JSMN_ARRAY)
 	{
 		//puts("Incorrect message syntax [1].");
 		return -2;
 	}
-	const int len = t[0].size;
+	const int len = JSMN_TOK[0].size;
 	int i = 1;
 	for(int n = 0; n < len; n++)
 	{
 		// { "key" : "value" } pairs plus 'object' token overhead
-		int size = t[i].size * 2 + 1;
-		if(t[i].type != JSMN_OBJECT)
+		int size = JSMN_TOK[i].size * 2 + 1;
+		if(JSMN_TOK[i].type != JSMN_OBJECT)
 		{
 			//puts("Incorrect message syntax [2].");
 			return -3;
 		}
-		else if(t[i].size != LED_CTRL_OBJ_SIZE)
+		else if(JSMN_TOK[i].size != LED_CTRL_OBJ_SIZE)
 		{
 			//puts("Incorrect message syntax [3].");
 			return -4;
 		}
 
-		int id_idx = -1, ps_idx = -1;
+		int id_idx = -1, st_idx = -1;
 
-		if(json_check_key(msg, &t[i+1], "id", JSMN_STRING) && json_check_key(msg, &t[i+3], "state", JSMN_STRING))
+		if(__jsmn_tok_keyvalue_cmp(msg, &JSMN_TOK[i+1], "id", JSMN_STRING)
+		  && __jsmn_tok_keyvalue_cmp(msg, &JSMN_TOK[i+3], "state", JSMN_PRIMITIVE))
 		{
 			id_idx = i+2;
-			ps_idx = i+4;
+			st_idx = i+4;
 		}
-		else if(json_check_key(msg, &t[i+3], "id", JSMN_STRING) && json_check_key(msg, &t[i+1], "state", JSMN_STRING))
+		else if(__jsmn_tok_keyvalue_cmp(msg, &JSMN_TOK[i+3], "id", JSMN_STRING)
+		  && __jsmn_tok_keyvalue_cmp(msg, &JSMN_TOK[i+1], "state", JSMN_PRIMITIVE))
 		{
 			id_idx = i+4;
-			ps_idx = i+2;
+			st_idx = i+2;
 		}
 		else
 		{
 			//puts("Incorrect message syntax [4].");
 			return -5;
 		}
-		for(int k = 0; k < led_n; k++)
+		for(int k = 0; k < leds_len; k++)
 		{
-			if(strncmp(leds[k].Id, msg+t[id_idx].start, strlen(leds[k].Id)) == 0)
-				leds[k].State = strtol(msg+t[ps_idx].start, NULL, 10);
+			if(__jsmn_tok_str_cmp(msg, &JSMN_TOK[id_idx], leds[k].Id))
+				leds[k].State = strtol(msg+JSMN_TOK[st_idx].start, NULL, 10);
 		}
 		i = i + size;
 	}
+
 	return 0;
 }
 
@@ -165,20 +146,27 @@ int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int le
 
 /* Public functions ----------------------------------------------------------*/
 /**
+ * @brief Serial API LED initialization
+ */
+void SERIAL_API_LED_ReadMsg(void){ }
+
+/**
  * @brief Serial API LED control message reading
  * @param[in] 	  msg		: Input message
  * @param[in/out] leds		: Serial API LED control structure array
- * @param[in] 	  leds_n	: Serial API LED control structure array length
+ * @param[in] 	  leds_len	: Serial API LED control structure array's length
+ * @retval Parsing status: 0 if successful, <0 otherwise
  */
-void SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_n)
+int SERIAL_API_LED_ReadMsg(const char* msg, SERIAL_API_LED_TypeDef* leds, int leds_len)
 {
-	for(int i = 0; i < leds_n; i++)
+	for(int i = 0; i < leds_len; i++)
 	{
 		/* Message structure: 3 character ID + state as 0/1 e.g. LD11 to turn LD1 on */
 		if(strncmp(leds[i].Id, msg, 3) == 0)
 			leds[i].State = strtol(&msg[3], NULL, 10);
 	}
-}
 
+	return 0;
+}
 
 #endif

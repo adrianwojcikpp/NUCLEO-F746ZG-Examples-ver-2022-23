@@ -3773,3 +3773,27 @@
 2022-10-20 15:26:41,185 [INFO] ApiDbMcu:505 - Load IP Config File for PDM2PCM
 2022-10-20 15:26:41,394 [INFO] OpenFileManager:327 - Restore cursor
 2022-10-20 15:26:55,018 [INFO] NvicIntPanel:100 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-10-20 17:17:34,209 [INFO] Activator:177 - 
+
+
+2022-10-20 17:17:34,209 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-20 17:18:02,822 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2022-10-20 17:18:02,822 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2022-10-20 17:18:02,822 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2022-10-20 21:17:01,193 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 21:17:01,193 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 21:17:01,193 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-10-20 22:29:33,491 [INFO] Activator:177 - 
+
+
+2022-10-20 22:29:33,491 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-20 22:30:07,335 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2022-10-20 22:30:07,335 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2022-10-20 22:30:07,351 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2022-10-21 23:11:20,289 [INFO] Activator:177 - 
+
+
+2022-10-21 23:11:20,289 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-21 23:12:02,474 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2022-10-21 23:12:02,474 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2022-10-21 23:12:02,474 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.

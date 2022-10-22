@@ -1,4 +1,46 @@
-16:59:40 **** Incremental Build of configuration Debug for project L02_Example ****
+00:03:13 **** Incremental Build of configuration Debug for project L02_Example ****
+make -j12 all 
+arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Components/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
+arm-none-eabi-gcc -o "L02_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L02_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L02_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L02_Example.elf
+ 
+arm-none-eabi-size   L02_Example.elf 
+arm-none-eabi-objdump -h -S  L02_Example.elf  > "L02_Example.list"
+   text	   data	    bss	    dec	    hex	filename
+  18600	    216	   2336	  21152	   52a0	L02_Example.elf
+Finished building: default.size.stdout
+ 
+Finished building: L02_Example.list
+ 
+12:19:29 **** Incremental Build of configuration Debug for project L02_Example ****
+make -j12 all 
+arm-none-eabi-size   L02_Example.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18600	    216	   2336	  21152	   52a0	L02_Example.elf
+Finished building: default.size.stdout
+ 
+12:25:07 **** Incremental Build of configuration Debug for project L02_Example ****
+make -j12 all 
+arm-none-eabi-size   L02_Example.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18600	    216	   2336	  21152	   52a0	L02_Example.elf
+Finished building: default.size.stdout
+ 
+12:27:14 **** Incremental Build of configuration Debug for project L02_Example ****
+make -j12 all 
+arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Components/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
+arm-none-eabi-gcc -o "L02_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L02_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L02_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L02_Example.elf
+ 
+arm-none-eabi-size   L02_Example.elf 
+arm-none-eabi-objdump -h -S  L02_Example.elf  > "L02_Example.list"
+   text	   data	    bss	    dec	    hex	filename
+  18600	    216	   2848	  21664	   54a0	L02_Example.elf
+Finished building: default.size.stdout
+ 
+Finished building: L02_Example.list
+ 
+12:30:32 **** Incremental Build of configuration Debug for project L02_Example ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Components/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "L02_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L02_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L02_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -7,15 +49,8 @@ Finished building target: L02_Example.elf
 arm-none-eabi-size   L02_Example.elf 
 arm-none-eabi-objdump -h -S  L02_Example.elf  > "L02_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  18960	    216	   1808	  20984	   51f8	L02_Example.elf
+  18600	    216	   2872	  21688	   54b8	L02_Example.elf
 Finished building: default.size.stdout
  
 Finished building: L02_Example.list
- 
-16:59:57 **** Incremental Build of configuration Debug for project L02_Example ****
-make -j12 all 
-arm-none-eabi-size   L02_Example.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18960	    216	   1808	  20984	   51f8	L02_Example.elf
-Finished building: default.size.stdout
  

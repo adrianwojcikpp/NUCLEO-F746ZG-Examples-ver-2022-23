@@ -21,7 +21,7 @@
 
 
 #ifdef SERIAL_API_JSON
-#define SERIAL_API_LED_MSG_LEN 100
+#define SERIAL_API_LED_MSG_LEN 124
 #else
 #define SERIAL_API_LED_MSG_LEN 4
 #endif

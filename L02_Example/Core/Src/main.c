@@ -59,26 +59,25 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/**
-  * @brief  Rx Transfer completed callback.
-  * @param  huart UART handle.
-  * @retval None
-  */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+
+int _write(int file, char *ptr, int len)
 {
-  if(huart == &huart3)
-  {
-    int hleds_len = sizeof(hleds) / sizeof(hleds[0]);
-    int status = SERIAL_API_LED_ReadMsg(msg, hleds, hleds_len);
+  HAL_UART_Transmit(&huart3, (uint8_t*)ptr, len, 0xFFFF);
+  return len;
+}
 
-    if(status == 0)
-    {
-       for(int i = 0; i < hleds_len; i++)
-         LED_GPIO_Write(hleds[i].Led, hleds[i].State);
-    }
-
-    HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
-  }
+int _read(int file, char *ptr, int len)
+{
+	int msg_len = 0;
+	while(msg_len <= len)
+	{
+		HAL_UART_Receive(&huart3, (uint8_t*)ptr, 1, 0xFFFF);
+		msg_len++;
+		if(*ptr == '\r')
+			break;
+		ptr++;
+	}
+	return msg_len;
 }
 
 /* USER CODE END 0 */
@@ -113,13 +112,28 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, SERIAL_API_LED_MSG_LEN);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	memset(msg, '\0', SERIAL_API_LED_MSG_LEN);
+	scanf("%s", msg);
+
+	int hleds_len = sizeof(hleds) / sizeof(hleds[0]);
+	int status = SERIAL_API_LED_ReadMsg(msg, hleds, hleds_len);
+
+	if(status == 0)
+	{
+	  for(int i = 0; i < hleds_len; i++)
+	    LED_GPIO_Write(hleds[i].Led, hleds[i].State);
+	}
+
+	puts(msg);
+	puts("\r\n");
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

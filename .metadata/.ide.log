@@ -9144,3 +9144,102 @@
 2022-10-27 18:01:10,455 [INFO] ProjectBuilder:4285 - Time for Generating toolchain IDE Files: 2306mS.
 2022-10-27 18:01:10,456 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 1mS.
 2022-10-27 18:01:10,458 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-10-27 18:27:47,873 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 364290976 Bytes (979369984)
+2022-10-27 18:27:49,389 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 420387744 Bytes (979369984)
+2022-10-27 18:27:49,549 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: TIM1_8F7
+2022-10-27 18:27:49,550 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: SYS
+2022-10-27 18:27:49,550 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: RCC
+2022-10-27 18:27:49,550 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: NVIC
+2022-10-27 18:27:49,550 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: USART
+2022-10-27 18:27:49,550 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: GPIO
+2022-10-27 18:27:49,551 [INFO] CodeGenerator:690 - code generatio: config db path: C:\ST\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.6.1.202207061420\\db\
+2022-10-27 18:27:49,684 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\license.tmp_save
+2022-10-27 18:27:49,748 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\license.tmp
+2022-10-27 18:27:49,796 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\gpio.c_save
+2022-10-27 18:27:49,862 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\gpio.c
+2022-10-27 18:27:49,867 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\gpio.h_save
+2022-10-27 18:27:49,919 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\gpio.h
+2022-10-27 18:27:50,128 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\cortex.tmp_save
+2022-10-27 18:27:50,185 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\cortex.tmp
+2022-10-27 18:27:50,195 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\tim.c_save
+2022-10-27 18:27:50,270 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\tim.c
+2022-10-27 18:27:50,275 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\tim.h_save
+2022-10-27 18:27:50,325 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\tim.h
+2022-10-27 18:27:50,336 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\usart.c_save
+2022-10-27 18:27:50,405 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\usart.c
+2022-10-27 18:27:50,409 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\usart.h_save
+2022-10-27 18:27:50,473 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\usart.h
+2022-10-27 18:27:50,488 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_it.c_save
+2022-10-27 18:27:50,548 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_it.c
+2022-10-27 18:27:50,555 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_it.h_save
+2022-10-27 18:27:50,601 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_it.h
+2022-10-27 18:27:50,612 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_hal_msp.c_save
+2022-10-27 18:27:50,672 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_hal_msp.c
+2022-10-27 18:27:50,675 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\system.tmp_save
+2022-10-27 18:27:50,715 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\system.tmp
+2022-10-27 18:27:50,724 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_hal_conf.h_save
+2022-10-27 18:27:50,789 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_hal_conf.h
+2022-10-27 18:27:50,812 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\main.h_save
+2022-10-27 18:27:50,869 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\main.h
+2022-10-27 18:27:50,877 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\main.c_save
+2022-10-27 18:27:50,952 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\main.c
+2022-10-27 18:27:51,445 [INFO] ProjectBuilder:2919 - Time for Copy HAL[1] : 176mS.
+2022-10-27 18:27:51,449 [INFO] ProjectBuilder:4117 - Project Generator version: 3.17.1
+2022-10-27 18:27:51,615 [INFO] ConfigFileManager:1394 - The Die is : DIE449
+2022-10-27 18:27:52,480 [INFO] ProjectBuilder:4285 - Time for Generating toolchain IDE Files: 1031mS.
+2022-10-27 18:27:52,481 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-10-27 18:27:52,483 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-10-27 18:43:20,218 [INFO] NvicIntPanel:100 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,500x187,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-10-27 18:52:24,039 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 652518000 Bytes (979369984)
+2022-10-27 18:52:25,802 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 687121008 Bytes (979369984)
+2022-10-27 18:52:25,947 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 719100528 Bytes (979369984)
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: TIM1_8F7
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: SYS
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: RCC
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: NVIC
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: USART
+2022-10-27 18:52:26,140 [INFO] BlockDiagram:2753 - set Specific Code input for plugin: GPIO
+2022-10-27 18:52:26,142 [INFO] CodeGenerator:690 - code generatio: config db path: C:\ST\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.6.1.202207061420\\db\
+2022-10-27 18:52:26,312 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\license.tmp_save
+2022-10-27 18:52:26,396 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\license.tmp
+2022-10-27 18:52:26,467 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\gpio.c_save
+2022-10-27 18:52:26,537 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\gpio.c
+2022-10-27 18:52:26,541 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\gpio.h_save
+2022-10-27 18:52:26,586 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\gpio.h
+2022-10-27 18:52:26,696 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\cortex.tmp_save
+2022-10-27 18:52:26,755 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\cortex.tmp
+2022-10-27 18:52:26,767 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\tim.c_save
+2022-10-27 18:52:26,833 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\tim.c
+2022-10-27 18:52:26,837 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\tim.h_save
+2022-10-27 18:52:26,892 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\tim.h
+2022-10-27 18:52:26,907 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\usart.c_save
+2022-10-27 18:52:26,973 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\usart.c
+2022-10-27 18:52:26,977 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\usart.h_save
+2022-10-27 18:52:27,027 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\usart.h
+2022-10-27 18:52:27,042 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_it.c_save
+2022-10-27 18:52:27,109 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_it.c
+2022-10-27 18:52:27,116 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_it.h_save
+2022-10-27 18:52:27,159 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_it.h
+2022-10-27 18:52:27,170 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_hal_msp.c_save
+2022-10-27 18:52:27,234 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\stm32f7xx_hal_msp.c
+2022-10-27 18:52:27,236 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\system.tmp_save
+2022-10-27 18:52:27,277 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\MXTmpFiles\system.tmp
+2022-10-27 18:52:27,287 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_hal_conf.h_save
+2022-10-27 18:52:27,349 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\stm32f7xx_hal_conf.h
+2022-10-27 18:52:27,370 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\main.h_save
+2022-10-27 18:52:27,429 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Inc\main.h
+2022-10-27 18:52:27,437 [INFO] CodeEngine:245 - oldGeneratedFile, C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\main.c_save
+2022-10-27 18:52:27,512 [INFO] CodeEngine:269 - Generated code: C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\Core\Src\main.c
+2022-10-27 18:52:28,031 [INFO] ProjectBuilder:2919 - Time for Copy HAL[1] : 172mS.
+2022-10-27 18:52:28,034 [INFO] ProjectBuilder:4117 - Project Generator version: 3.17.1
+2022-10-27 18:52:28,189 [INFO] ConfigFileManager:1394 - The Die is : DIE449
+2022-10-27 18:52:29,117 [INFO] ProjectBuilder:4285 - Time for Generating toolchain IDE Files: 1083mS.
+2022-10-27 18:52:29,117 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-10-27 18:52:29,120 [INFO] ProjectBuilder:2790 - Time for Copy CMSIS : 0mS.
+2022-10-27 18:54:41,330 [INFO] Activator:177 - 
+
+
+2022-10-27 18:54:41,331 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-27 18:55:11,584 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2022-10-27 18:55:11,585 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: Defaulting to no-operation (NOP) logger implementation
+2022-10-27 18:55:11,586 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.

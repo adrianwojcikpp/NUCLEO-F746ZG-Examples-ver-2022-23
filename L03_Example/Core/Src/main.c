@@ -90,7 +90,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       HAL_TIM_Base_Stop_IT(&htim2);
       __HAL_TIM_SET_COUNTER(&htim2, 0);
       __HAL_TIM_SET_AUTORELOAD(&htim2, tim3_arr);
-      HAL_TIM_Base_Start_IT(&htim2);
     }
     HAL_UART_Receive_IT(huart, (uint8_t*)msg, TIM2_MSG_LEN);
   }
@@ -143,6 +142,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  __HAL_TIM_CLEAR_FLAG(&htim2, TIM_SR_UIF);
   HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, TIM2_MSG_LEN);
   /* USER CODE END 2 */
 

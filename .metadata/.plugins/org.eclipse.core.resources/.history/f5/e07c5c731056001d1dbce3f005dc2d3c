@@ -67,9 +67,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim == &htim2)
   {
-    LED_GPIO_Off(&hld1);
+    LED_GPIO_Toggle(&hld1);
     LD1_State = LED_GPIO_Read(&hld1);
-    HAL_TIM_Base_Stop_IT(&htim2);
   }
 }
 
@@ -93,21 +92,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
       HAL_TIM_Base_Start_IT(&htim2);
     }
     HAL_UART_Receive_IT(huart, (uint8_t*)msg, TIM2_MSG_LEN);
-  }
-}
-
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if(GPIO_Pin == USER_Btn_Pin)
-  {
-    LED_GPIO_On(&hld1);
-    LD1_State = LED_GPIO_Read(&hld1);
-    HAL_TIM_Base_Start_IT(&htim2);
   }
 }
 /* USER CODE END 0 */
@@ -143,6 +127,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
   HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, TIM2_MSG_LEN);
   /* USER CODE END 2 */
 

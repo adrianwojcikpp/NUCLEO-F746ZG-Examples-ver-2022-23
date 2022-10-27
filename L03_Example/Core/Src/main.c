@@ -24,6 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include "led_config.h"
 /* USER CODE END Includes */
 
@@ -45,6 +46,8 @@
 
 /* USER CODE BEGIN PV */
 _Bool LD1_State;
+char msg[] = "000\r";
+const unsigned int TIM2_MSG_LEN = sizeof(msg)-1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,6 +69,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     LED_GPIO_Toggle(&hld1);
     LD1_State = LED_GPIO_Read(&hld1);
+  }
+}
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart3)
+  {
+    unsigned int time_ms, tim3_arr;
+    int status = sscanf(msg, "%d", &time_ms);
+    tim3_arr = time_ms*1000 - 1;
+    if(status == 1)
+    {
+      HAL_TIM_Base_Stop_IT(&htim2);
+      __HAL_TIM_SET_COUNTER(&htim2, 0);
+      __HAL_TIM_SET_AUTORELOAD(&htim2, tim3_arr);
+      HAL_TIM_Base_Start_IT(&htim2);
+    }
+    HAL_UART_Receive_IT(huart, (uint8_t*)msg, TIM2_MSG_LEN);
   }
 }
 /* USER CODE END 0 */
@@ -102,6 +128,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, TIM2_MSG_LEN);
   /* USER CODE END 2 */
 
   /* Infinite loop */

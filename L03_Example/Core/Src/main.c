@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "lamp_config.h"
+#include "led_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,8 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char msg[] = "000\r";
-const int LAMP_MSG_LEN = (sizeof(msg)-1);
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,49 +55,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  /* Dimmer (LAMP) handling */
-  if(GPIO_Pin == hlamp1.SYNC_Pin)
-  {
-    LAMP_StartTimer(&hlamp1);
-  }
-}
-
-/**
-  * @brief  Period elapsed callback in non-blocking mode
-  * @param  htim TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* Dimmer (LAMP) handling */
-  if(htim->Instance == hlamp1.Timer->Instance)
-  {
-    LAMP_StopTimer(&hlamp1);
-    LAMP_TriacFiring(&hlamp1);
-  }
-}
-
-/**
-  * @brief  Rx Transfer completed callback.
-  * @param  huart UART handle.
-  * @retval None
-  */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-  /* Dimmer (LAMP) handling */
-  if(huart == &huart3)
-  {
-    sscanf(msg, "%f", &(hlamp1.TriacFiringAngle));
-    HAL_UART_Receive_IT(huart, (uint8_t*)msg, LAMP_MSG_LEN);
-  }
-}
 
 /* USER CODE END 0 */
 
@@ -133,13 +89,21 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart3, (uint8_t*)msg, LAMP_MSG_LEN);
+  HAL_TIM_Base_Start(&htim2);
+  _Bool LD1_State;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if(__HAL_TIM_GET_FLAG(&htim2, TIM_FLAG_UPDATE))
+    {
+      __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
+      LED_GPIO_Toggle(&hld1);
+      LD1_State = LED_GPIO_Read(&hld1);
+    }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

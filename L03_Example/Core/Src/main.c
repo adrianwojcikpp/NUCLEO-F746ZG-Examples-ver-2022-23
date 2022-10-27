@@ -44,7 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+_Bool LD1_State;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,7 +55,19 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+/**
+  * @brief  Period elapsed callback in non-blocking mode
+  * @param  htim TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim == &htim2)
+  {
+    LED_GPIO_Toggle(&hld1);
+    LD1_State = LED_GPIO_Read(&hld1);
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -89,21 +101,13 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start(&htim2);
-  _Bool LD1_State;
+  HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if(__HAL_TIM_GET_FLAG(&htim2, TIM_FLAG_UPDATE))
-    {
-      __HAL_TIM_CLEAR_FLAG(&htim2, TIM_FLAG_UPDATE);
-      LED_GPIO_Toggle(&hld1);
-      LD1_State = LED_GPIO_Read(&hld1);
-    }
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

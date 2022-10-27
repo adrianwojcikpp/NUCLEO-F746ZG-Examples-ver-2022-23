@@ -1,0 +1,9 @@
+../Components/Inc/jsmn.h:106:19:jsmn_alloc_token	32	static
+../Components/Inc/jsmn.h:124:13:jsmn_fill_token	24	static
+../Components/Inc/jsmn.h:135:12:jsmn_parse_primitive	32	static
+../Components/Inc/jsmn.h:193:12:jsmn_parse_string	40	static
+../Components/Inc/jsmn.h:268:14:jsmn_parse	56	static
+../Components/Inc/jsmn.h:459:15:jsmn_init	16	static
+../Components/Src/serial_api.c:45:7:__jsmn_tok_str_cmp	32	static
+../Components/Src/serial_api.c:61:7:__jsmn_tok_keyvalue_cmp	32	static
+../Components/Src/serial_api.c:83:5:SERIAL_API_LED_ReadMsg	64	static

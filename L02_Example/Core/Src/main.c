@@ -68,16 +68,16 @@ int _write(int file, char *ptr, int len)
 
 int _read(int file, char *ptr, int len)
 {
-	int msg_len = 0;
-	while(msg_len <= len)
-	{
-		HAL_UART_Receive(&huart3, (uint8_t*)ptr, 1, 0xFFFF);
-		msg_len++;
-		if(*ptr == '\r')
-			break;
-		ptr++;
-	}
-	return msg_len;
+  int msg_len = 0;
+  while(msg_len <= len)
+  {
+    HAL_UART_Receive(&huart3, (uint8_t*)ptr, 1, 0xFFFF);
+    msg_len++;
+    if(*ptr == '\r')
+      break;
+    ptr++;
+  }
+  return msg_len;
 }
 
 /* USER CODE END 0 */

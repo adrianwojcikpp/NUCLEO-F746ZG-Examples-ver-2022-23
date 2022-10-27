@@ -1,0 +1,22 @@
+19:03:24 **** Build of configuration Debug for project L03_Example ****
+make -j12 all 
+arm-none-eabi-gcc -o "L03_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L03_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L03_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L03_Example.elf
+ 
+arm-none-eabi-size   L03_Example.elf 
+arm-none-eabi-objdump -h -S  L03_Example.elf  > "L03_Example.list"
+arm-none-eabi-objcopy  -O ihex  L03_Example.elf  "L03_Example.hex"
+arm-none-eabi-objcopy  -O binary  L03_Example.elf  "L03_Example.bin"
+   text	   data	    bss	    dec	    hex	filename
+  38648	    532	   1804	  40984	   a018	L03_Example.elf
+Finished building: default.size.stdout
+ 
+Finished building: L03_Example.bin
+Finished building: L03_Example.hex
+ 
+ 
+Finished building: L03_Example.list
+ 
+
+19:03:27 Build Finished. 0 errors, 0 warnings. (took 2s.760ms)
+

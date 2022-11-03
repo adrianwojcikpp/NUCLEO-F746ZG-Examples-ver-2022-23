@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "led_config.h"
 #include "btn_config.h"
+#include "encoder_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+unsigned int cnt = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,6 +73,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -89,25 +91,21 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   LED_PWM_Init(&hledr);
   LED_PWM_Init(&hledg);
   LED_PWM_Init(&hledb);
+  ENC_Init(&henc1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    LED_PWM_WriteDuty(&hledb,  0.0f);
-    LED_PWM_WriteDuty(&hledr, 50.0f);
-    HAL_Delay(500);
-    LED_PWM_WriteDuty(&hledr,  0.0f);
-    LED_PWM_WriteDuty(&hledg, 50.0f);
-    HAL_Delay(500);
-    LED_PWM_WriteDuty(&hledg,  0.0f);
-    LED_PWM_WriteDuty(&hledb, 50.0f);
-    HAL_Delay(500);
+    cnt = ENC_GetCounter(&henc1);
+    LED_PWM_WriteDuty(&hledb,  cnt / 4.0f);
+    HAL_Delay(10);
 
     /* USER CODE END WHILE */
 

@@ -31,7 +31,7 @@
 ENC_HandleTypeDef henc1 = {
   .Timer = &htim3,
   .Counter  = 0,
-  .CounterMax = 100, .CounterMin = 0,
+  .CounterMax = 400, .CounterMin = 0,
   .CounterInc = 0, .CounterDec = 0
 };
 

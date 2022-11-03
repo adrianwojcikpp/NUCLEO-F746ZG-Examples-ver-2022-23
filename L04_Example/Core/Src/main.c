@@ -46,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned int cnt = 0;
+float cnt = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,7 +73,6 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -97,14 +96,42 @@ int main(void)
   LED_PWM_Init(&hledg);
   LED_PWM_Init(&hledb);
   ENC_Init(&henc1);
+  const unsigned int channel_max = 2;
+  const unsigned int channel_min = 0;
+  unsigned int channel = channel_min;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    cnt = ENC_GetCounter(&henc1);
-    LED_PWM_WriteDuty(&hledb,  cnt / 4.0f);
+    cnt = ENC_GetCounter(&henc1) / 4.0f;
+
+    if(BTN_GPIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
+      channel = (channel < channel_max) ? (channel+1) : channel_min;
+    if(BTN_GPIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE)
+      channel = (channel > channel_min) ? (channel-1) : channel_max;
+
+    switch(channel)
+    {
+      case 0:
+      {
+        LED_PWM_WriteDuty(&hledr,  cnt);
+        break;
+      }
+      case 1:
+      {
+        LED_PWM_WriteDuty(&hledg,  cnt);
+        break;
+      }
+      case 2:
+      {
+        LED_PWM_WriteDuty(&hledb,  cnt);
+        break;
+      }
+      default: break;
+    }
+
     HAL_Delay(10);
 
     /* USER CODE END WHILE */

@@ -1,0 +1,4 @@
+../Components/Src/lamp.c:42:6:LAMP_StartTimer	24	static
+../Components/Src/lamp.c:66:6:LAMP_StopTimer	16	static
+../Components/Src/lamp.c:80:6:LAMP_TriacFiring	24	static,ignoring_inline_asm
+../Components/Src/lamp.c:94:6:LAMP_SetBrightness	16	static

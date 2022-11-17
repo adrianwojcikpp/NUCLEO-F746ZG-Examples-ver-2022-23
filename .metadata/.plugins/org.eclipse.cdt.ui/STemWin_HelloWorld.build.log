@@ -1,0 +1,10 @@
+10:10:52 **** Incremental Build of configuration Debug for project STemWin_HelloWorld ****
+make -j12 all 
+arm-none-eabi-size   STemWin_HelloWorld.elf 
+   text	   data	    bss	    dec	    hex	filename
+  42816	     76	 158372	 201264	  31230	STemWin_HelloWorld.elf
+Finished building: default.size.stdout
+ 
+
+10:10:53 Build Finished. 0 errors, 0 warnings. (took 360ms)
+

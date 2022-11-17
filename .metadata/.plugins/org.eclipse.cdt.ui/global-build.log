@@ -1,36 +1,28 @@
-16:28:29 **** Incremental Build of configuration Debug for project L04_Example ****
+13:23:55 **** Incremental Build of configuration Debug for project L05_Example ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/tim.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/tim.d" -MT"Core/Src/tim.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/tim.o"
-arm-none-eabi-gcc "../Core/Src/usart.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/usart.d" -MT"Core/Src/usart.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/usart.o"
-arm-none-eabi-gcc "../Components/Src/btn.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/btn.d" -MT"Components/Src/btn.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/btn.o"
-arm-none-eabi-gcc "../Components/Src/btn_config.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/btn_config.d" -MT"Components/Src/btn_config.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/btn_config.o"
-arm-none-eabi-gcc "../Components/Src/encoder.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/encoder.d" -MT"Components/Src/encoder.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/encoder.o"
-arm-none-eabi-gcc "../Components/Src/encoder_config.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/encoder_config.d" -MT"Components/Src/encoder_config.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/encoder_config.o"
-arm-none-eabi-gcc "../Components/Src/led.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/led.d" -MT"Components/Src/led.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/led.o"
-arm-none-eabi-gcc "../Components/Src/led_config.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/led_config.d" -MT"Components/Src/led_config.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/led_config.o"
-arm-none-eabi-gcc -o "L04_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L04_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L04_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L04_Example.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L05_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "L05_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L05_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L05_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L05_Example.elf
  
-arm-none-eabi-size   L04_Example.elf 
-arm-none-eabi-objdump -h -S  L04_Example.elf  > "L04_Example.list"
+arm-none-eabi-size   L05_Example.elf 
+arm-none-eabi-objdump -h -S  L05_Example.elf  > "L05_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  21036	     92	   1860	  22988	   59cc	L04_Example.elf
+  27276	    200	   2040	  29516	   734c	L05_Example.elf
 Finished building: default.size.stdout
  
-Finished building: L04_Example.list
+Finished building: L05_Example.list
  
-16:28:45 **** Incremental Build of configuration Debug for project L04_Example ****
+13:24:46 **** Incremental Build of configuration Debug for project L05_Example ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L04_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "L04_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L04_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L04_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L04_Example.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L05_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "L05_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L05_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L05_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L05_Example.elf
  
-arm-none-eabi-size   L04_Example.elf 
-arm-none-eabi-objdump -h -S  L04_Example.elf  > "L04_Example.list"
+arm-none-eabi-size   L05_Example.elf 
+arm-none-eabi-objdump -h -S  L05_Example.elf  > "L05_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  21036	     92	   1860	  22988	   59cc	L04_Example.elf
+  27276	    200	   2040	  29516	   734c	L05_Example.elf
 Finished building: default.size.stdout
  
-Finished building: L04_Example.list
+Finished building: L05_Example.list
  

@@ -1,0 +1,10 @@
+10:13:01 **** Incremental Build of configuration Debug for project STM32F7508-DISCO ****
+make -j12 all 
+arm-none-eabi-size   STM32F7508-DISCO.elf 
+   text	   data	    bss	    dec	    hex	filename
+5751512	   2540	 302932	6056984	 5c6c18	STM32F7508-DISCO.elf
+Finished building: default.size.stdout
+ 
+
+10:13:01 Build Finished. 0 errors, 0 warnings. (took 654ms)
+

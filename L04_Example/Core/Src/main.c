@@ -46,7 +46,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-float cnt = 0;
+unsigned int enc_cnt = 0;
+unsigned int duty_cycle = 50;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,48 +93,23 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  LED_PWM_Init(&hledr);
-  LED_PWM_Init(&hledg);
-  LED_PWM_Init(&hledb);
-  ENC_Init(&henc1);
-  const unsigned int channel_max = 2;
-  const unsigned int channel_min = 0;
-  unsigned int channel = channel_min;
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+  const unsigned int duty_cycle_values[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+  const unsigned int duty_cycle_len = sizeof(duty_cycle_values) / sizeof(duty_cycle_values[0]);
+  unsigned int duty_cycle_cnt = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    cnt = ENC_GetCounter(&henc1) / 4.0f;
-
-    if(BTN_GPIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
-      channel = (channel < channel_max) ? (channel+1) : channel_min;
-    if(BTN_GPIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE)
-      channel = (channel > channel_min) ? (channel-1) : channel_max;
-
-    switch(channel)
-    {
-      case 0:
-      {
-        LED_PWM_WriteDuty(&hledr,  cnt);
-        break;
-      }
-      case 1:
-      {
-        LED_PWM_WriteDuty(&hledg,  cnt);
-        break;
-      }
-      case 2:
-      {
-        LED_PWM_WriteDuty(&hledb,  cnt);
-        break;
-      }
-      default: break;
-    }
-
-    HAL_Delay(10);
-
+    unsigned int arr = __HAL_TIM_GET_AUTORELOAD(&htim2);
+    duty_cycle = duty_cycle_values[duty_cycle_cnt];
+    duty_cycle_cnt = (duty_cycle_cnt < duty_cycle_len-1) ? (duty_cycle_cnt+1) : (0);
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, arr * duty_cycle / 100);
+    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

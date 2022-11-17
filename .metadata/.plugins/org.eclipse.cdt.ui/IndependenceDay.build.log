@@ -1,0 +1,10 @@
+16:49:57 **** Incremental Build of configuration Debug for project IndependenceDay ****
+make -j12 all 
+arm-none-eabi-size   IndependenceDay.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11964	     20	   1724	  13708	   358c	IndependenceDay.elf
+Finished building: default.size.stdout
+ 
+
+16:49:58 Build Finished. 0 errors, 0 warnings. (took 359ms)
+

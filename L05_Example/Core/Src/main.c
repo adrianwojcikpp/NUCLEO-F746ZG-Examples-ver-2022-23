@@ -59,7 +59,19 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+/**
+  * @brief  Period elapsed callback in non-blocking mode
+  * @param  htim TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim==&htim6)
+  {
+    uint32_t cnt = ENC_GetCounter(&henc1);
+    LED_PWM_WriteDuty(&hld4, cnt / 4.0f);
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -95,6 +107,7 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM5_Init();
   MX_I2C1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   ENC_Init(&henc1);
   LED_PWM_Init(&hld4);
@@ -102,17 +115,19 @@ int main(void)
   LED_PWM_Init(&hldg);
   LED_PWM_Init(&hldb);
   BH1750_Init(&hbh1750_1);
+  HAL_TIM_Base_Start_IT(&htim6);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char msg[32] = { 0, };
+  int msg_len = sprintf(msg, "PWM, LIGTH\r\n");
+  HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
   while (1)
   {
-    uint32_t cnt = ENC_GetCounter(&henc1);
-    LED_PWM_WriteDuty(&hld4, cnt / 4.0f);
     light = BH1750_ReadIlluminance_lux(&hbh1750_1);
     char msg[32] = { 0, };
-    int msg_len = sprintf(msg, "Illuminance:  %d [lx]\r\n", (int)light);
+    int msg_len = sprintf(msg, "%d, %d\r\n", (int)LED_PWM_ReadDuty(&hld4), (int)light);
     HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
     HAL_Delay(1000);
     /* USER CODE END WHILE */

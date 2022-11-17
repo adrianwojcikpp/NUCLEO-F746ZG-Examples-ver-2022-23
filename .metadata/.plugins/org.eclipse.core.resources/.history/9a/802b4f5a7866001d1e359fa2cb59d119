@@ -1,0 +1,5 @@
+../Components/Src/btn.c:37:7:__btn_gpio_read	16	static
+../Components/Src/btn.c:50:24:BTN_GPIO_Read	24	static
+../Components/Src/btn.c:61:7:BTN_GPIO_IsPressed	16	static
+../Components/Src/btn.c:71:7:BTN_GPIO_IsReleased	16	static
+../Components/Src/btn.c:81:23:BTN_GPIO_EdgeDetected	24	static

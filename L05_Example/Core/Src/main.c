@@ -49,6 +49,7 @@
 
 /* USER CODE BEGIN PV */
 float light;
+uint32_t cnt = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,7 +69,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim==&htim6)
   {
-    uint32_t cnt = ENC_GetCounter(&henc1);
+    cnt = ENC_GetCounter(&henc1);
     LED_PWM_WriteDuty(&hld4, cnt / 4.0f);
   }
 }
@@ -115,7 +116,7 @@ int main(void)
   LED_PWM_Init(&hldg);
   LED_PWM_Init(&hldb);
   BH1750_Init(&hbh1750_1);
-  HAL_TIM_Base_Start_IT(&htim6);
+  //HAL_TIM_Base_Start_IT(&htim6);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -129,6 +130,8 @@ int main(void)
     char msg[32] = { 0, };
     int msg_len = sprintf(msg, "%d, %d\r\n", (int)LED_PWM_ReadDuty(&hld4), (int)light);
     HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
+    LED_PWM_WriteDuty(&hld4, (float)cnt);
+    cnt = (cnt < 100) ? (cnt+1) : (0);
     HAL_Delay(1000);
     /* USER CODE END WHILE */
 

@@ -1,2 +1,0 @@
-../Components/Src/encoder.c:39:6:ENC_Init	16	static
-../Components/Src/encoder.c:49:10:ENC_GetCounter	24	static

@@ -9,6 +9,8 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\TouchGFXProjects\ttt\STM32CubeIDE"/>
+			<item value="C:\TouchGFXProjects\ttt"/>
 			<item value="C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L04_Example"/>
 			<item value="C:\Users\AW\STM32Cube\Repository\STM32Cube_FW_F7_V1.17.0\Projects\STM32756G_EVAL\Applications\LwIP\LwIP_TCP_Echo_Client"/>
 			<item value="C:\TouchGFXProjects\TestApp"/>
@@ -41,5 +43,13 @@
 	<section name="ChooseWorkspaceDialogSettings">
 		<item key="DIALOG_X_ORIGIN" value="596"/>
 		<item key="DIALOG_Y_ORIGIN" value="274"/>
+	</section>
+	<section name="CleanDialogSettings">
+		<item key="BUILD_NOW" value="false"/>
+		<item key="BUILD_ALL" value="true"/>
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="662"/>
+		<item key="DIALOG_HEIGHT" value="529"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

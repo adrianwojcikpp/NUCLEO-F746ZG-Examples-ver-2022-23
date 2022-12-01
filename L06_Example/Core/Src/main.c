@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "led_config.h"
+#include "btn_config.h"
 #include "heater_config.h"
 #include "bmp2_config.h"
 /* USER CODE END Includes */

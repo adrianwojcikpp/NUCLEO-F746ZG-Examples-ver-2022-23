@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -37,7 +38,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TASK 5
+#define TASK 6
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,6 +49,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint16_t ADC1_DMA_BUF[ADC1_NUMBER_OF_CONV];
 float pot_volts[ADC1_NUMBER_OF_CONV];
 /* USER CODE END PV */
 
@@ -94,6 +96,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     // Non-blocking mode #1: interrupt
     HAL_ADC_Start_IT(&hadc1);
 
+#elif TASK == 6
+
+    // Non-blocking mode #2: direct memory access
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)ADC1_DMA_BUF, ADC1_NUMBER_OF_CONV);
+
 #endif
 
   }
@@ -117,6 +124,15 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
     hadc->NbrOfCurrentConversionRank++;
     if( hadc->NbrOfCurrentConversionRank == hadc->Init.NbrOfConversion )
       hadc->NbrOfCurrentConversionRank = 0;
+#elif TASK == 6
+    // Iterate over all conversions
+    for(hadc1.NbrOfCurrentConversionRank = 0;
+        hadc1.NbrOfCurrentConversionRank < hadc1.Init.NbrOfConversion;
+        hadc1.NbrOfCurrentConversionRank++)
+    {
+      // Reading i-ranked conversion result from DMA buffer
+      pot_volts[hadc1.NbrOfCurrentConversionRank] = ADC_REG2VOLTAGE(ADC1_DMA_BUF[hadc1.NbrOfCurrentConversionRank]);
+    }
 #endif
   }
 }
@@ -154,6 +170,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);

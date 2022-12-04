@@ -37,7 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TASK 4
+#define TASK 5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,6 +46,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+
 /* USER CODE BEGIN PV */
 float pot_volts[ADC1_NUMBER_OF_CONV];
 /* USER CODE END PV */
@@ -81,15 +82,42 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         hadc1.NbrOfCurrentConversionRank++)
     {
       // Poll for i-ranked conversion
-      if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
+      if (HAL_ADC_PollForConversion(&hadc1, ADC1_TIMEOUT) == HAL_OK)
       {
         // Reading i-ranked conversion result from Data Register
         pot_volts[hadc1.NbrOfCurrentConversionRank] = ADC_REG2VOLTAGE(HAL_ADC_GetValue(&hadc1));
       }
     }
 
+#elif TASK == 5
+
+    // Non-blocking mode #1: interrupt
+    HAL_ADC_Start_IT(&hadc1);
+
 #endif
 
+  }
+}
+
+/**
+  * @brief  Regular conversion complete callback in non blocking mode
+  * @param  hadc pointer to a ADC_HandleTypeDef structure that contains
+  *         the configuration information for the specified ADC.
+  * @retval None
+  */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+  if(hadc == &hadc1)
+  {
+#if TASK == 5
+    // Reading i-ranked conversion result from Data Register
+    pot_volts[hadc1.NbrOfCurrentConversionRank] = ADC_REG2VOLTAGE(HAL_ADC_GetValue(&hadc1));
+
+    // Increment rank
+    hadc->NbrOfCurrentConversionRank++;
+    if( hadc->NbrOfCurrentConversionRank == hadc->Init.NbrOfConversion )
+      hadc->NbrOfCurrentConversionRank = 0;
+#endif
   }
 }
 

@@ -1,0 +1,1 @@
+START python.exe -i nucleo_init.py

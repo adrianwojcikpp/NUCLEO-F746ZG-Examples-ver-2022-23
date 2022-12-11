@@ -19,8 +19,11 @@
 	</section>
 	<section name="PDOMSearchPage">
 		<item key="caseSensitive" value="false"/>
-		<item key="searchFlags" value="227191"/>
+		<item key="searchFlags" value="131079"/>
 		<list key="previousPatterns">
+			<item value="TIM_SR_UIF_Msk"/>
+			<item value="TIM_SR_UIF"/>
+			<item value="UIF"/>
 			<item value="HAL_I2C_MODE_MEM"/>
 			<item value="uxItemSize"/>
 			<item value="TxPktSemaphore"/>

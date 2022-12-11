@@ -1,0 +1,1 @@
+START python.exe -i plot.py

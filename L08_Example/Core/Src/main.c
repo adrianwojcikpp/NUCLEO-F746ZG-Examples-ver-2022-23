@@ -41,7 +41,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TASK 1
+#define TASK 3
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -96,7 +96,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 #endif
 
-#if TASK == 2 || TASK == 2
+#if TASK == 2 || TASK == 3
 
     t += ts;
     output_mv = 1000.0f*(A*sinf(2*M_PI*f*t) + B);

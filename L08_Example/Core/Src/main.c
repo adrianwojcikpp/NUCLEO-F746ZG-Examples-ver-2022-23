@@ -27,6 +27,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include "aio.h"
 #include "btn_config.h"
 #include "disp_config.h"
@@ -39,6 +41,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define TASK 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,7 +52,24 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+#if TASK < 4
+
+float A = 1.0f;         // [V]
+float B = 1.0f;         // [V]
+float f = 10.0f;        // [Hz]
+float t = 0;            // [s]
+const float ts = 0.001; // [s]
+
 float output_mv = 500.0f;
+
+#elif TASK >= 4
+
+uint16_t sine_wave[] = {
+  #include "sine.csv"
+};
+
+#endif
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,7 +90,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim == &htim6)
   {
+#if TASK == 1 || TASK == 3
+
     DISP_ROUTINE(&hdisp1);
+
+#endif
+
+#if TASK == 2 || TASK == 2
+
+    t += ts;
+    output_mv = 1000.0f*(A*sinf(2*M_PI*f*t) + B);
+    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, DAC_VOLTAGE2REG(output_mv));
+
+    DISP_ROUTINE(&hdisp1);
+
+#elif TASK == 4
+
+    static unsigned i = 0;
+    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, sine_wave[i]);
+    i++;
+    if(i >= sizeof(sine_wave)/sizeof(uint16_t))
+      i = 0;
+
+#endif
   }
 }
 
@@ -110,14 +152,25 @@ int main(void)
   MX_I2C1_Init();
   MX_DAC_Init();
   /* USER CODE BEGIN 2 */
+#if TASK < 5
+
   HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
   HAL_TIM_Base_Start_IT(&htim6);
+
+#elif TASK == 5
+
+  HAL_DAC_Start_DMA(&hdac, DAC_CHANNEL_1, (uint32_t*)sine_wave, sizeof(sine_wave)/sizeof(uint16_t), DAC_ALIGN_12B_R);
+  HAL_TIM_Base_Start(&htim6);
+
+#endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+#if TASK == 1
+
     if(BTN_DIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
       output_mv = (output_mv <= 0.0f) ? (0.0f) : (output_mv - 100.0f);
 
@@ -126,6 +179,18 @@ int main(void)
 
     DISP_printDecUInt(&hdisp1, (unsigned int)output_mv);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, DAC_VOLTAGE2REG(output_mv));
+
+#elif TASK == 3
+
+    if(BTN_DIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
+      A = (A <= 0.0f) ? (0.0f) : (A - 0.1f);
+
+    if(BTN_DIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE)
+      A = (A >= 1.0f) ? (1.0f) : (A + 0.1f);
+
+    DISP_printDecUInt(&hdisp1, (unsigned int)(A*1000));
+
+#endif
 
     HAL_Delay(10);
     /* USER CODE END WHILE */

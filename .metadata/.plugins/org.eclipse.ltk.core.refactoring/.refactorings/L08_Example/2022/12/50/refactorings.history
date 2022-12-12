@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;L08_Example/MATLAB/SINE_WAVE_GENERATION.m&apos; to &apos;sine_wave_generator.m&apos;" description="Rename resource &apos;SINE_WAVE_GENERATION.m&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="MATLAB/SINE_WAVE_GENERATION.m" name="sine_wave_generator.m" stamp="1670844241950" updateReferences="true"/>
+</session>

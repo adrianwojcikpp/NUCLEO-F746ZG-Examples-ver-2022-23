@@ -1,4 +1,6 @@
 #MicroXplorer Configuration settings - do not modify
+DAC.DAC_Trigger=DAC_TRIGGER_T6_TRGO
+DAC.IPParameters=DAC_Trigger
 Dma.DAC1.0.Direction=DMA_MEMORY_TO_PERIPH
 Dma.DAC1.0.FIFOMode=DMA_FIFOMODE_DISABLE
 Dma.DAC1.0.Instance=DMA1_Stream5
@@ -525,9 +527,10 @@ SH.S_TIM4_CH2.0=TIM4_CH2
 SH.S_TIM4_CH2.ConfNb=1
 SH.S_TIM5_CH4.0=TIM5_CH4
 SH.S_TIM5_CH4.ConfNb=1
-TIM6.IPParameters=Prescaler,Period
+TIM6.IPParameters=Prescaler,Period,TIM_MasterOutputTrigger
 TIM6.Period=999
 TIM6.Prescaler=107
+TIM6.TIM_MasterOutputTrigger=TIM_TRGO_UPDATE
 USART3.IPParameters=VirtualMode-Asynchronous
 USART3.VirtualMode-Asynchronous=VM_ASYNC
 VP_SYS_VS_Systick.Mode=SysTick

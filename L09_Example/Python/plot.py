@@ -8,9 +8,14 @@ nucleo = LightControl('COM22')
 
 t = []
 x = []
+e_max = 0.05
+r1 = []
+r2 = []
 
 fig, ax = plt.subplots()
 line, = ax.plot(t, x, lw=2)
+limitdown, = ax.plot(t, r1, lw=1, color='r')
+limitup, = ax.plot(t, r2, lw=1,color='r')
 ax.set_xlabel('Time [s]')
 ax.grid()
 
@@ -32,14 +37,18 @@ def update(val):
 
 ref_slider.on_changed(update)
 
-t_now = 0
-
 while(True):
     m = nucleo.get_measurement()
     t = numpy.append(t, m.time/1000)
+    r1 = numpy.append(r1, max([ref_slider.val-ref_slider.valmax*e_max/2,0,0]))
+    r2 = numpy.append(r2, ref_slider.val+ref_slider.valmax*e_max/2)
     x = numpy.append(x, m.value)
     line.set_xdata(t)
     line.set_ydata(x)
+    limitdown.set_xdata(t)
+    limitdown.set_ydata(r1)
+    limitup.set_xdata(t)
+    limitup.set_ydata(r2)
     plt.draw()
     ax.set_xlim(t[0], max([t[-1],t[0]+0.1]))
     ax.set_ylim(0, 2500)

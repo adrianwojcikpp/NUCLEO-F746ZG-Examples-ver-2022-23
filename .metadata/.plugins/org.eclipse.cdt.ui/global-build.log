@@ -1,154 +1,49 @@
-02:53:30 **** Incremental Build of configuration Debug for project L09_Example ****
+14:13:40 **** Incremental Build of configuration Debug for project L08_Example ****
 make -j12 all 
-arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L08_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "L08_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L08_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L08_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L08_Example.elf
  
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
+arm-none-eabi-size   L08_Example.elf 
+arm-none-eabi-objdump -h -S  L08_Example.elf  > "L08_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  51768	    848	   2160	  54776	   d5f8	L09_Example.elf
+  19852	     48	   2080	  21980	   55dc	L08_Example.elf
 Finished building: default.size.stdout
  
-Finished building: L09_Example.list
+Finished building: L08_Example.list
  
-02:54:59 **** Incremental Build of configuration Debug for project L09_Example ****
+09:42:20 **** Incremental Build of configuration Debug for project L08_Example ****
 make -j12 all 
-arm-none-eabi-size   L09_Example.elf 
+arm-none-eabi-size   L08_Example.elf 
    text	   data	    bss	    dec	    hex	filename
-  51768	    848	   2160	  54776	   d5f8	L09_Example.elf
+  19852	     48	   2080	  21980	   55dc	L08_Example.elf
 Finished building: default.size.stdout
  
-02:55:44 **** Incremental Build of configuration Debug for project L09_Example ****
+09:44:58 **** Incremental Build of configuration Debug for project L08_Example ****
 make -j12 all 
-arm-none-eabi-size   L09_Example.elf 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L08_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "L08_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L08_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L08_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L08_Example.elf
+ 
+arm-none-eabi-size   L08_Example.elf 
+arm-none-eabi-objdump -h -S  L08_Example.elf  > "L08_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  51768	    848	   2160	  54776	   d5f8	L09_Example.elf
+  19852	     48	   2080	  21980	   55dc	L08_Example.elf
 Finished building: default.size.stdout
  
-02:56:05 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
+Finished building: L08_Example.list
  
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
+10:55:52 **** Incremental Build of configuration Debug for project L08_Example ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L08_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "L08_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L08_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L08_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: L08_Example.elf
+ 
+arm-none-eabi-size   L08_Example.elf 
+arm-none-eabi-objdump -h -S  L08_Example.elf  > "L08_Example.list"
    text	   data	    bss	    dec	    hex	filename
-  51544	    848	   2160	  54552	   d518	L09_Example.elf
+  20744	    152	   2080	  22976	   59c0	L08_Example.elf
 Finished building: default.size.stdout
  
-Finished building: L09_Example.list
- 
-03:05:44 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51552	    848	   2160	  54560	   d520	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:06:57 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51576	    848	   2160	  54584	   d538	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:08:23 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51584	    848	   2160	  54592	   d540	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:10:52 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51656	    848	   2160	  54664	   d588	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:16:18 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51664	    848	   2160	  54672	   d590	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:19:04 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Components/Src/serial_api.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/serial_api.d" -MT"Components/Src/serial_api.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/serial_api.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51664	    848	   2160	  54672	   d590	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:24:00 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Components/Src/pid2dof_config.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/pid2dof_config.d" -MT"Components/Src/pid2dof_config.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/pid2dof_config.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51664	    848	   2160	  54672	   d590	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
- 
-03:58:39 **** Incremental Build of configuration Debug for project L09_Example ****
-make -j12 all 
-arm-none-eabi-gcc "../Components/Src/pid2dof_config.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I"C:/PP/Dydaktyka/MATERIALY/SM_MATERIALY/NUCLEO-F756ZG-Examples-ver-2022-23/L09_Example/Components/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Components/Src/pid2dof_config.d" -MT"Components/Src/pid2dof_config.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Components/Src/pid2dof_config.o"
-arm-none-eabi-gcc -o "L09_Example.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="L09_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: L09_Example.elf
- 
-arm-none-eabi-size   L09_Example.elf 
-arm-none-eabi-objdump -h -S  L09_Example.elf  > "L09_Example.list"
-   text	   data	    bss	    dec	    hex	filename
-  51664	    848	   2160	  54672	   d590	L09_Example.elf
-Finished building: default.size.stdout
- 
-Finished building: L09_Example.list
+Finished building: L08_Example.list
  

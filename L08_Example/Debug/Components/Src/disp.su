@@ -1,0 +1,8 @@
+../Components/Src/disp.c:36:6:disp_write_data	24	static
+../Components/Src/disp.c:42:6:disp_disable_all_digits	24	static
+../Components/Src/disp.c:48:6:disp_enable_digit	16	static
+../Components/Src/disp.c:54:6:disp_enable_decimal_point	16	static
+../Components/Src/disp.c:59:6:disp_disable_decimal_point	16	static
+../Components/Src/disp.c:71:6:DISP_EnableDecimalPoint	16	static
+../Components/Src/disp.c:81:6:DISP_printDecUInt	24	static
+../Components/Src/disp.c:96:6:DISP_ROUTINE	24	static

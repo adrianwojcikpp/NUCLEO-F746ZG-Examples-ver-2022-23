@@ -1,0 +1,4 @@
+../Components/Src/btn.c:37:23:BTN_DIO_Read	24	static
+../Components/Src/btn.c:48:7:BTN_DIO_IsPressed	16	static
+../Components/Src/btn.c:58:7:BTN_DIO_IsReleased	16	static
+../Components/Src/btn.c:68:22:BTN_DIO_EdgeDetected	24	static

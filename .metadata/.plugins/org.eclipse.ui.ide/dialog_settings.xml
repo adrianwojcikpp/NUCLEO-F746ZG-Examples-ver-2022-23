@@ -9,6 +9,9 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L09_Example"/>
+			<item value="C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L07_Example"/>
+			<item value="C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L08_Example"/>
 			<item value="C:\TouchGFXProjects\ttt\STM32CubeIDE"/>
 			<item value="C:\TouchGFXProjects\ttt"/>
 			<item value="C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\L04_Example"/>
@@ -45,7 +48,7 @@
 		<item key="DIALOG_Y_ORIGIN" value="274"/>
 	</section>
 	<section name="CleanDialogSettings">
-		<item key="BUILD_NOW" value="false"/>
+		<item key="BUILD_NOW" value="true"/>
 		<item key="BUILD_ALL" value="true"/>
 		<item key="TOGGLE_SELECTED" value="false"/>
 		<item key="DIALOG_WIDTH" value="662"/>

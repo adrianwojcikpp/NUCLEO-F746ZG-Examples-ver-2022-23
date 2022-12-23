@@ -41,7 +41,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TASK 3
+#define TASK 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -102,8 +102,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     output_mv = 1000.0f*(A*sinf(2*M_PI*f*t) + B);
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, DAC_VOLTAGE2REG(output_mv));
 
-    DISP_ROUTINE(&hdisp1);
-
 #elif TASK == 4
 
     static unsigned i = 0;
@@ -155,7 +153,7 @@ int main(void)
 #if TASK < 5
 
   HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
-  HAL_TIM_Base_Start_IT(&htim6);
+  //HAL_TIM_Base_Start_IT(&htim6);
 
 #elif TASK == 5
 

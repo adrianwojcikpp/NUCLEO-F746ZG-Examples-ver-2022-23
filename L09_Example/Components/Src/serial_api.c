@@ -55,6 +55,7 @@ void Serial_API_GetSysVar(Serial_API_Buffer* RxBuffer, SysVars_TypeDef* SysVars,
       static const char TxJsonFormat[] = "{\"time\":%d,\"name\":\"%s\",\"value\":%10.3f,\"unit\":%s}\n";
       int TXRESPONSE_SIZE = sprintf((char*)TxResponse, TxJsonFormat, (int)TimeMs, SysVars[i].var_name, *(SysVars[i].val), SysVars[i].var_unit);
       HAL_UART_Transmit(CONTROL_UART, TxResponse, TXRESPONSE_SIZE, 100);
+	  break;
     }
   }
 }
@@ -66,6 +67,7 @@ void Serial_API_SetSysVar(Serial_API_Buffer* RxBuffer, SysVars_TypeDef* SysVars,
     if(strncmp(RxBuffer->CmdStr.var_id, SysVars[i].var_id, VAR_ID_SIZE) == 0)
     {
       sscanf(RxBuffer->CmdStr.val, "%6f", SysVars[i].val);
+	  break;
     }
   }
 }

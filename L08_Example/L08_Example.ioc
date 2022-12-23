@@ -1,6 +1,7 @@
 #MicroXplorer Configuration settings - do not modify
-DAC.DAC_Trigger=DAC_TRIGGER_T6_TRGO
-DAC.IPParameters=DAC_Trigger
+DAC.DAC_OutputBuffer=DAC_OUTPUTBUFFER_DISABLE
+DAC.DAC_Trigger=DAC_TRIGGER_NONE
+DAC.IPParameters=DAC_Trigger,DAC_OutputBuffer
 Dma.DAC1.0.Direction=DMA_MEMORY_TO_PERIPH
 Dma.DAC1.0.FIFOMode=DMA_FIFOMODE_DISABLE
 Dma.DAC1.0.Instance=DMA1_Stream5

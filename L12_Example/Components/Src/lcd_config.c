@@ -38,7 +38,7 @@ LCD_DIO_HandleTypeDef hlcd1 = {
   .RS = DIO_INIT_HANDLE(LCD_RS),
   .E = DIO_INIT_HANDLE(LCD_E),
   .Mode = LCD_4_BIT_MODE,
-  .Timer = &htim5
+  .Timer = &htim7
 };
 
 /* Private function ----------------------------------------------------------*/

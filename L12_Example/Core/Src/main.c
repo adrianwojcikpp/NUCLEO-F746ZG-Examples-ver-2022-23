@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "disp_config.h"
 #include "lcd_config.h"
+#include "menu_config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +48,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int t50 = 0;
+int t200 = 0;
+int t250 = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -59,6 +62,18 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+
+/**
+  * @brief  EXTI line detection callbacks.
+  * @param  GPIO_Pin Specifies the pins connected EXTI line
+  * @retval None
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin == USER_Btn_Pin && hmenu.Item->Next != NULL)
+    hmenu.Item = hmenu.Item->Next;
+}
+
 /**
   * @brief  Period elapsed callback in non-blocking mode
   * @param  htim TIM handle
@@ -66,9 +81,32 @@ void SystemClock_Config(void);
   */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if(htim == &htim6)
+  if(htim == htim_disp)
   {
     DISP_DIO_ROUTINE(&hdisp1);
+  }
+  else if(htim == htim_menu)
+  {
+    MENU_ROUTINE(&hmenu);
+  }
+  else if(htim == htim_inputs)
+  {
+    static int time_ms = 0;
+
+    // Start ADC conversion
+    t50 = !t50;
+
+    // Read from light sensor
+    if(time_ms % 200 == 0)
+      t200 = !t200;
+
+    // Read from temperature sensor
+    if(time_ms % 250 == 0)
+      t250 = !t250;
+
+    time_ms += 50;
+    if(time_ms == 1000)
+      time_ms = 0;
   }
 }
 
@@ -106,12 +144,20 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM6_Init();
   MX_I2C1_Init();
-  MX_TIM5_Init();
+  MX_TIM7_Init();
+  MX_TIM10_Init();
+  MX_TIM11_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
   LCD_DIO_Init(&hlcd1);
-  LCD_DIO_printStr(&hlcd1, "Hello, Nucleo!");
   DISP_TM1637_SetBrightness(&hdisp2, 2);
-  HAL_TIM_Base_Start_IT(&htim6);
+  MENU_Init(&hmenu);
+
+  HAL_TIM_Base_Start_IT(htim_disp);
+  HAL_TIM_Base_Start_IT(htim_inputs);
+  HAL_TIM_Base_Start_IT(htim_menu);
+
   uint16_t i = 0;
   /* USER CODE END 2 */
 
@@ -119,8 +165,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    LCD_DIO_SetCursor(&hlcd1, 1, 0);
-    LCD_DIO_printDecInt(&hlcd1, i);
     DISP_TM1637_printDecUInt(&hdisp2, i);
     DISP_DIO_printDecUInt(&hdisp1, i++);
     if(i == 10000)

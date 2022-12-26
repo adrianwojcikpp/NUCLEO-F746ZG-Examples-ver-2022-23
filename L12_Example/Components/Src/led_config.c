@@ -23,9 +23,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-LED_DIO_Handle_TypeDef hld1 = LED_DIO_INIT_HANDLE(LD1, LED_ON_HIGH);
-LED_DIO_Handle_TypeDef hld2 = LED_DIO_INIT_HANDLE(LD2, LED_ON_HIGH);
-LED_DIO_Handle_TypeDef hld3 = LED_DIO_INIT_HANDLE(LD3, LED_ON_HIGH);
+LED_DIO_Handle_TypeDef hldg1 = LED_DIO_INIT_HANDLE(LD1, LED_ON_HIGH);
+LED_DIO_Handle_TypeDef hldb1 = LED_DIO_INIT_HANDLE(LD2, LED_ON_HIGH);
+LED_DIO_Handle_TypeDef hldr1 = LED_DIO_INIT_HANDLE(LD3, LED_ON_HIGH);
 
 /* Private function prototypes -----------------------------------------------*/
 

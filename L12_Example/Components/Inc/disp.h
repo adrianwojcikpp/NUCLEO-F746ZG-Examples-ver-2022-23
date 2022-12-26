@@ -53,8 +53,8 @@ typedef struct {
 
 /**
  * @brief Selecting decimal point position
- * @param[in] hdisp : Display handler
- * @param[in] dp    : Decimal point position
+ * @param[out] hdisp : Display handler
+ * @param[in]  dp    : Decimal point position
  *       This parameter can be one of the following values:
  *            @arg DISP_DP_1 : Decimal point is enabled on first section (most significant digit)
  *            @arg DISP_DP_2 : Decimal point is enabled on second section
@@ -65,30 +65,30 @@ typedef struct {
 void DISP_DIO_EnableDecimalPoint(DISP_DIO_HandleTypeDef* hdisp, DISP_DP_TypeDef dp);
 
 /**
- * @brief TODO
- * @param[in] hdisp :
- * @param[in] dec   :
+ * @brief Write a non-negative decimal number on display.
+ * @param[out] hdisp : Display handler
+ * @param[in]  dec   : Non-negative decimal number, max. 4 digits
  */
 void DISP_DIO_printDecUInt(DISP_DIO_HandleTypeDef* hdisp, uint16_t dec);
 
 /**
- * @brief TODO
- * @param[in] hdisp :
+ * @brief Display refresh routine. Should be executed at least 120 times per second.
+ * @param[in] hdisp : Display handler
  */
 void DISP_DIO_ROUTINE(DISP_DIO_HandleTypeDef* hdisp);
 
 /**
- * @brief TODO
- * @param[in] hdisp : TODO
- * @param[in] dec   : TODO
+ * @brief Write a non-negative decimal number on display.
+ * @param[in] hdisp : Display handler
+ * @param[in] dec   : Non-negative decimal number, max. 4 digits
  * @return None
  */
 void DISP_TM1637_printDecUInt(DISP_TM1637_HandleTypeDef* hdisp, uint16_t dec);
 
 /**
- * @brief TODO
- * @param[in] hdisp      : TODO
- * @param[in] brightness : TODO
+ * @brief Set display brightness.
+ * @param[in] hdisp      : Display handler
+ * @param[in] brightness : Brightness value: <0, 8>. 0 = display off.
  * @return None
  */
 void DISP_TM1637_SetBrightness(DISP_TM1637_HandleTypeDef* hdisp, uint8_t brightness);

@@ -21,9 +21,9 @@
 /* Public macro --------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-extern LED_DIO_Handle_TypeDef hld1; //!< Green on-board LED
-extern LED_DIO_Handle_TypeDef hld2; //!< Blue on-board LED
-extern LED_DIO_Handle_TypeDef hld3; //!< Red on-board LED
+extern LED_DIO_Handle_TypeDef hldg1; //!< Green on-board LED
+extern LED_DIO_Handle_TypeDef hldb1; //!< Blue on-board LED
+extern LED_DIO_Handle_TypeDef hldr1; //!< Red on-board LED
 
 /* Public function prototypes ------------------------------------------------*/
 

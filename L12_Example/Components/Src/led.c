@@ -44,7 +44,7 @@ void LED_DIO_On(const LED_DIO_Handle_TypeDef* hled)
   * @param[in] hled   : LED DIO handler
   * @retval None
   */
-void DIO(const LED_DIO_Handle_TypeDef* hled)
+void LED_DIO_Off(const LED_DIO_Handle_TypeDef* hled)
 {
   LED_DIO_Write(hled, LED_OFF);
 }

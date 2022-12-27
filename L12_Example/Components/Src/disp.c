@@ -206,6 +206,17 @@ void DISP_DIO_ROUTINE(DISP_DIO_HandleTypeDef* hdisp)
 }
 
 /**
+ * @brief TM1637 LED display initialization procedure.
+ * @note Brighthness set to 2
+ * @param[in] hdisp : Display handler
+ * @return None
+ */
+void DISP_TM1637_Init(DISP_TM1637_HandleTypeDef* hdisp)
+{
+  DISP_TM1637_SetBrightness(hdisp, 2);
+}
+
+/**
  * @brief Write a non-negative decimal number on display.
  * @param[in] hdisp : Display handler
  * @param[in] dec   : Non-negative decimal number, max. 4 digits

@@ -41,6 +41,7 @@ struct _MenuItem {
 typedef struct {
   /* Menu structure */
   MenuItem_TypeDef* Item;
+  _Bool ItemChanged;
   /* Output devices */
   MENU_DisplayType Display;
   MENU_SerialType SerialPort;

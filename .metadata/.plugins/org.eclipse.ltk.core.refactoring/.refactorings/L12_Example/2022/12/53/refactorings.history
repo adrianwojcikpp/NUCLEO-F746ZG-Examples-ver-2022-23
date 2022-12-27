@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;L12_Example/Components/Inc/fir_b.csv&apos; to &apos;fir_coeffs.csv&apos;" description="Rename resource &apos;fir_b.csv&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Components/Inc/fir_b.csv" name="fir_coeffs.csv" stamp="1672169467171" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;L12_Example/Components/Inc/fir_b.csv&apos; to &apos;fir_coeffs.csv&apos;" description="Rename resource &apos;fir_b.csv&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Components/Inc/fir_b.csv" name="fir_coeffs.csv" stamp="1672171118601" updateReferences="true"/>
+</session>

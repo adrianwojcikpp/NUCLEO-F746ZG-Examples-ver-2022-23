@@ -57,13 +57,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BMP2_SCK_Pin GPIO_PIN_2
+#define BMP2_SCK_GPIO_Port GPIOE
 #define BMP2_CS2_Pin GPIO_PIN_3
 #define BMP2_CS2_GPIO_Port GPIOE
 #define BMP2_CS1_Pin GPIO_PIN_4
 #define BMP2_CS1_GPIO_Port GPIOE
+#define BMP2_MISO_Pin GPIO_PIN_5
+#define BMP2_MISO_GPIO_Port GPIOE
+#define BMP2_MOSI_Pin GPIO_PIN_6
+#define BMP2_MOSI_GPIO_Port GPIOE
 #define USER_Btn_Pin GPIO_PIN_13
 #define USER_Btn_GPIO_Port GPIOC
-#define USER_Btn_EXTI_IRQn EXTI15_10_IRQn
 #define LAMP_TRIAC_Pin GPIO_PIN_3
 #define LAMP_TRIAC_GPIO_Port GPIOF
 #define LAMP_SYNC_Pin GPIO_PIN_5
@@ -82,8 +87,6 @@ void Error_Handler(void);
 #define RMII_REF_CLK_GPIO_Port GPIOA
 #define RMII_MDIO_Pin GPIO_PIN_2
 #define RMII_MDIO_GPIO_Port GPIOA
-#define LD4_Pin GPIO_PIN_3
-#define LD4_GPIO_Port GPIOA
 #define LED_RGB_R_Pin GPIO_PIN_5
 #define LED_RGB_R_GPIO_Port GPIOA
 #define ENC_CLK_Pin GPIO_PIN_6
@@ -140,8 +143,10 @@ void Error_Handler(void);
 #define DISP_CLK_GPIO_Port GPIOD
 #define DISP_DIO_Pin GPIO_PIN_12
 #define DISP_DIO_GPIO_Port GPIOD
-#define HEATER_Pin GPIO_PIN_13
-#define HEATER_GPIO_Port GPIOD
+#define LD4_Pin GPIO_PIN_13
+#define LD4_GPIO_Port GPIOD
+#define LD6_Pin GPIO_PIN_14
+#define LD6_GPIO_Port GPIOD
 #define LCD_D6_Pin GPIO_PIN_15
 #define LCD_D6_GPIO_Port GPIOD
 #define USB_PowerSwitchOn_Pin GPIO_PIN_6
@@ -178,6 +183,8 @@ void Error_Handler(void);
 #define DISP_H_GPIO_Port GPIOG
 #define SW0_Pin GPIO_PIN_3
 #define SW0_GPIO_Port GPIOB
+#define LD5_Pin GPIO_PIN_6
+#define LD5_GPIO_Port GPIOB
 #define LD2_Pin GPIO_PIN_7
 #define LD2_GPIO_Port GPIOB
 #define BH1750_SCL_Pin GPIO_PIN_8

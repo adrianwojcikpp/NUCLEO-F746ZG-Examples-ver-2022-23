@@ -70,11 +70,28 @@
 /**
  * @brief DAC data register to voltage in millivolts.
  * @param[in] reg : Data register
- * @return Input voltage in millivolts
+ * @return Output voltage in millivolts
  */
 #define DAC_REG2VOLTAGE(reg) (1000.0f*__LINEAR_TRANSFORM((float)reg,           \
                                                          0.0f, DAC_REG_MAX,    \
                                                          0.0f, DAC_VOLTAGE_MAX))
+/**
+ * @brief DAC voltage in percent to data register.
+ * @param[in] vol : Output voltage in percent [0-100]
+ * @return Data register
+ */
+#define DAC_PERCENT2REG(percent) (uint16_t)(__LINEAR_TRANSFORM(percent,\
+                                                          0.0, 100.0f, \
+                                                          0.0, DAC_REG_MAX))
+
+/**
+ * @brief DAC data register to percent
+ * @param[in] reg : Data register
+ * @return Output voltage percent [0-100]
+ */
+#define DAC_REG2PERCENT(reg) (1000.0f*__LINEAR_TRANSFORM((float)reg,           \
+                                                         0.0f, DAC_REG_MAX,    \
+                                                         0.0f, 100.0f))
 
 /* Public variables ----------------------------------------------------------*/
 

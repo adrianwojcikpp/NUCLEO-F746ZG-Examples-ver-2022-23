@@ -18,17 +18,28 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "dac.h"
 #include "dma.h"
 #include "i2c.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "led_config.h"
+#include "btn_config.h"
+#include "encoder_config.h"
+#include "bh1750_config.h"
+#include "bmp2_config.h"
+#include "aio.h"
+#include "arm_math.h"
 #include "disp_config.h"
 #include "lcd_config.h"
 #include "menu_config.h"
+extern unsigned int ADC1_ConvResults_mV[16];
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,6 +49,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define FIR_NUM_TAPS (sizeof(fir_coeffs)/sizeof(float32_t))
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,9 +60,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int t50 = 0;
-int t200 = 0;
-int t250 = 0;
+uint16_t ADC1_DATA[16];
+arm_fir_instance_f32 fir[2];
+const uint32_t fir_coeffs[] = {
+  #include "fir_coeffs.csv"
+};
+float32_t fir_state[2][64];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,18 +76,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
-/**
-  * @brief  EXTI line detection callbacks.
-  * @param  GPIO_Pin Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  if(GPIO_Pin == USER_Btn_Pin && hmenu.Item->Next != NULL)
-    hmenu.Item = hmenu.Item->Next;
-}
 
 /**
   * @brief  Period elapsed callback in non-blocking mode
@@ -87,26 +90,58 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   }
   else if(htim == htim_menu)
   {
+    if(BTN_DIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE && hmenu.Item->Next != NULL)
+    {
+      hmenu.Item = hmenu.Item->Next;
+      hmenu.ItemChanged = 1;
+    }
+
+    if(BTN_DIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE && hmenu.Item->Prev != NULL)
+    {
+      hmenu.Item = hmenu.Item->Prev;
+      hmenu.ItemChanged = 1;
+    }
+
     MENU_ROUTINE(&hmenu);
+
+    DISP_DIO_printDecUInt(&hdisp1, ADC1_ConvResults_mV[0]);
+    DISP_TM1637_printDecUInt(&hdisp2, ADC1_ConvResults_mV[1]);
   }
   else if(htim == htim_inputs)
   {
     static int time_ms = 0;
 
-    // Start ADC conversion
-    t50 = !t50;
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)ADC1_DATA, hadc1.Init.NbrOfConversion);
 
-    // Read from light sensor
     if(time_ms % 200 == 0)
-      t200 = !t200;
+      BH1750_ReadIlluminance_lux(&hbh1750_1);
 
-    // Read from temperature sensor
     if(time_ms % 250 == 0)
-      t250 = !t250;
+      BMP2_ReadTemperature_degC(&bmp2dev_1);
 
     time_ms += 50;
     if(time_ms == 1000)
       time_ms = 0;
+  }
+}
+
+/**
+  * @brief  Regular conversion complete callback in non blocking mode
+  * @param  hadc pointer to a ADC_HandleTypeDef structure that contains
+  *         the configuration information for the specified ADC.
+  * @retval None
+  */
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+  if(hadc == &hadc1)
+  {
+    for(int i = 0; i < hadc1.Init.NbrOfConversion; i++)
+    {
+      float in_tmp = ADC_REG2VOLTAGE(ADC1_DATA[i]);
+      float out_tmp;
+      arm_fir_f32(&fir[i], &in_tmp, &out_tmp, 1);
+      ADC1_ConvResults_mV[i] = out_tmp;
+    }
   }
 }
 
@@ -148,28 +183,44 @@ int main(void)
   MX_TIM10_Init();
   MX_TIM11_Init();
   MX_TIM3_Init();
+  MX_TIM4_Init();
+  MX_TIM2_Init();
+  MX_SPI4_Init();
+  MX_ADC1_Init();
+  MX_DAC_Init();
   /* USER CODE BEGIN 2 */
+  arm_fir_init_f32(&fir[0], FIR_NUM_TAPS, (const float32_t*)fir_coeffs, fir_state[0], 1);
+  arm_fir_init_f32(&fir[1], FIR_NUM_TAPS, (const float32_t*)fir_coeffs, fir_state[1], 1);
+
+  BH1750_Init(&hbh1750_1);
+  BMP2_Init(&bmp2dev_1);
+
+  LED_PWM_Init(&hldr2);
+  LED_PWM_Init(&hldg2);
+  LED_PWM_Init(&hldb2);
+  LED_PWM_Init(&hldr3);
+  LED_PWM_Init(&hldg3);
+  LED_PWM_Init(&hldb3);
+
+  ENC_Init(&henc1);
 
   LCD_DIO_Init(&hlcd1);
-  DISP_TM1637_SetBrightness(&hdisp2, 2);
+  DISP_TM1637_Init(&hdisp2);
+
   MENU_Init(&hmenu);
+
+  HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
 
   HAL_TIM_Base_Start_IT(htim_disp);
   HAL_TIM_Base_Start_IT(htim_inputs);
   HAL_TIM_Base_Start_IT(htim_menu);
-
-  uint16_t i = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    DISP_TM1637_printDecUInt(&hdisp2, i);
-    DISP_DIO_printDecUInt(&hdisp1, i++);
-    if(i == 10000)
-      i = 0;
-    HAL_Delay(100);
+    // Empty loop
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

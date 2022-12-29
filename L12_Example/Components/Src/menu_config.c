@@ -59,7 +59,7 @@ MENU_ITEM_CONTRUCTOR(menu_ain2, { menu_uint_io_routine(hmenuitem, ADC1_ConvResul
 MENU_ITEM_CONTRUCTOR(menu_bmp2,   { menu_float_io_routine(hmenuitem, BMP2_GET_TEMP(&bmp2dev_1), 5, "TEMP", "degC"); } );
 MENU_ITEM_CONTRUCTOR(menu_bh1750, { menu_float_io_routine(hmenuitem, hbh1750_1.Readout, 6, "LIGHT", "lx"); } );
 
-MENU_ITEM_CONTRUCTOR(menu_aout1, { menu_dac_routine(hmenuitem, DAC_CHANNEL_1, "DAC CH2"); } );
+MENU_ITEM_CONTRUCTOR(menu_aout1, { menu_dac_routine(hmenuitem, DAC_CHANNEL_1, "DAC CH1"); } );
 
 #define MENU_MAIN_LEN (sizeof(MENU_MAIN_ARRAY)/sizeof(MENU_MAIN_ARRAY[0]))
 MenuItem_TypeDef* MENU_MAIN_ARRAY[] = { /* Main menu list */

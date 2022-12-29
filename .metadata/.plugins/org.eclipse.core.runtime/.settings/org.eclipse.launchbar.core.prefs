@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:STemWin_HelloWorld.elf,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L12_Example
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:STemWin_HelloWorld.elf,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L10_L11_Example
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRtosTest\ Debug/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:FreeRtosTest\ Debug/activeLaunchTarget=null\:---
@@ -25,6 +25,8 @@ org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L08_Example\ Debug/activeLaunch
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L08_Example\ Debug/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L09_Example\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L09_Example\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L10_L11_Example/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L10_L11_Example/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L12_Example/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:L12_Example/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LwIP_HTTP_Server_Netconn_RTOS\ Debug/activeLaunchMode=run

@@ -29,6 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdlib.h>
 #include "led_config.h"
 #include "btn_config.h"
 #include "encoder_config.h"
@@ -140,7 +141,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
       float in_tmp = ADC_REG2VOLTAGE(ADC1_DATA[i]);
       float out_tmp;
       arm_fir_f32(&fir[i], &in_tmp, &out_tmp, 1);
-      ADC1_ConvResults_mV[i] = out_tmp;
+      if(abs(ADC1_ConvResults_mV[i] - (uint16_t)out_tmp) > 10)
+        ADC1_ConvResults_mV[i] = out_tmp;
     }
   }
 }

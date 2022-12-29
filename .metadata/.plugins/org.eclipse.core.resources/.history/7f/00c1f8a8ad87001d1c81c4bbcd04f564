@@ -1,0 +1,14 @@
+/* MATLAB GENERATED SOURCE FILE: FIR1_fir.c */
+#include "FIR1.h"
+// Filter state
+uint32_t FIR1_state_hex[FIR1_NUM_TAPS+FIR1_BLOCK_SIZE-1] = {
+  #include "FIR1_state_init.csv"
+};
+float32_t *FIR1_state = (float32_t*)FIR1_state_hex;
+// Filter coefficients
+uint32_t FIR1_coeffs_hex[FIR1_NUM_TAPS] = {
+  #include "FIR1_coeffs.csv"
+};
+float32_t *FIR1_coeffs = (float32_t*)FIR1_coeffs_hex;
+// Filter instance
+arm_fir_instance_f32 FIR1;

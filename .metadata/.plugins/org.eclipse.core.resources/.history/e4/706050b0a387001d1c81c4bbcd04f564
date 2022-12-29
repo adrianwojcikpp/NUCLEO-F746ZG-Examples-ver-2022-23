@@ -1,0 +1,55 @@
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+#include "CuTest.h"
+#include "arm_math.h"
+
+#define len(x) (sizeof(x)/sizeof(x[0]))
+
+void TestCmsisDsp_RMSE(CuTest *tc)
+{
+  const float32_t a[] = { 0.8150f, 0.9060f, 0.1270f };
+  const float32_t b[] = { 0.9130f, 0.6320f, 0.0980f };
+  float32_t a_minus_b[len(a)];
+  float32_t c;
+  const float32_t c_ref = 0.1688402f;
+
+  /* CMSIS DSP implementation of root mean square error */
+  arm_sub_f32(a, b, a_minus_b, len(a_minus_b));
+  arm_rms_f32(a_minus_b, len(a_minus_b), &c);
+
+  CuAssertDblEquals(tc, c_ref, c, 1e-7f);
+}
+
+#include "A_mat.h"
+#include "B_mat.h"
+#include "C_mat.h"
+#include "C_REF_mat.h"
+
+void TestCmsisDsp_MAT_MULT(CuTest *tc)
+{
+  /* Initialize matrix instances */
+  arm_mat_init_f32(&A, A_ROWS, A_COLS, (float32_t*)A_DATA);
+  arm_mat_init_f32(&B, B_ROWS, B_COLS, (float32_t*)B_DATA);
+  arm_mat_init_f32(&C, C_ROWS, C_COLS, (float32_t*)C_DATA);
+
+  arm_status status = arm_mat_mult_f32(&A, &B, &C);
+
+  CuAssertIntEquals(tc, ARM_MATH_SUCCESS, status);
+
+  float32_t err[C_ROWS*C_COLS];
+  arm_sub_f32(C.pData, C_REF.pData, err, C_ROWS*C_COLS);
+  float32_t rms;
+  arm_rms_f32(err, C_ROWS*C_COLS, &rms);
+
+  CuAssertDblEquals(tc, 0.0f, err, 1e-7f);
+}
+
+CuSuite* CuGetCmsisDspSuite(void)
+{
+	CuSuite* suite = CuSuiteNew();
+
+	SUITE_ADD_TEST(suite, TestCmsisDsp_RMSE);
+
+	return suite;
+}

@@ -1,0 +1,7 @@
+/* MATLAB GENERATED SOURCE FILE: A_mat.c */
+#include "C_mat.h"
+extern uint32_t C_DATA[C_ROWS*C_COLS] =
+{
+  #include "C.csv"
+};
+extern arm_matrix_instance_f32 C;

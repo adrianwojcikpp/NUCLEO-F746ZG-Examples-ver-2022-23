@@ -87,6 +87,8 @@ void Error_Handler(void);
 #define RMII_REF_CLK_GPIO_Port GPIOA
 #define RMII_MDIO_Pin GPIO_PIN_2
 #define RMII_MDIO_GPIO_Port GPIOA
+#define POTENTIOMETER1_Pin GPIO_PIN_3
+#define POTENTIOMETER1_GPIO_Port GPIOA
 #define LED_RGB_R_Pin GPIO_PIN_5
 #define LED_RGB_R_GPIO_Port GPIOA
 #define ENC_CLK_Pin GPIO_PIN_6
@@ -99,8 +101,6 @@ void Error_Handler(void);
 #define RMII_RXD1_GPIO_Port GPIOC
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
-#define POTENTIOMETER1_Pin GPIO_PIN_1
-#define POTENTIOMETER1_GPIO_Port GPIOB
 #define LCD_D7_Pin GPIO_PIN_12
 #define LCD_D7_GPIO_Port GPIOF
 #define DISP_2_Pin GPIO_PIN_14

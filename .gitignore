@@ -1,3 +1,6 @@
 
 L10_L11_Example/MATLAB/FAILES_unit_test_fir.m
 L10_L11_Example/MATLAB/FAILED_unit_test_mat_mul.m
+L10_L11_Example/MATLAB/move_files_to_stm32cube_project.m
+L10_L11_Example/MATLAB/FAILED_unit_test_pid.m
+L10_L11_Example/MATLAB/FAILED_unit_test_irr.m

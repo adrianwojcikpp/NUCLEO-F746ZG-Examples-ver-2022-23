@@ -1,4 +1,16 @@
 function generate_mat(name, x)
+% GENERATE_MAT Generates source file (.c), header file (.h) and text data 
+% file (.csv) for ARM CMSIS DSP matrix instance.
+%
+%   GENERATE_MAT(NAME, X) generated source, header and data file for matrix
+%   instance named NAME from input matrix X
+%
+%   Example:
+%        generate_mat('myMatrix', [1 2; 3 4])
+%
+%   generates files: myMatrix_mat.c, myMatrix_mat.h and myMatrix.csv with
+%   instance of single-presicion floating point matrix named 'myMatrix'
+%
 
 HEADER_STR = {
    ['/* MATLAB GENERATED HEADER FILE: ' name '_mat.h */']

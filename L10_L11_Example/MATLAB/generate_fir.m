@@ -1,5 +1,18 @@
 function generate_fir(name, fir_coeffs, blocksize)
-
+% GENERATE_FIR Generates source file (.c), header file (.h) and text data 
+% file (.csv) for ARM CMSIS DSP finite impulse response filter instance.
+%
+%   GENERATE_FIR(NAME, FIR_COEFFS, BLOCKSIZE) generated source, header and 
+%   data file for FIR filter instance named NAME from input coefficients
+%   vector FIR_COEFFS and with single input entry size of BLOCKSIZE
+%
+%   Example:
+%        generate_fir('myFilter', [1/3 1/3 1/3], 1)
+%
+%   generates files: myFilter_fir.c, myFilter_fir.h, myFilter_state_init.csv 
+%   and myFilter_coeffs.csv with instance of single-presicion floating point 
+%   FIR filter named 'myFilter'
+%
     vec2csvfile([name '_coeffs.csv'], fir_coeffs);
     vec2csvfile([name '_state_init.csv'], zeros(size(fir_coeffs)));
    

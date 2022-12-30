@@ -7,10 +7,12 @@
 %  @author   Adrian Wojcik
 %  @version  2.0
 %  @date     12-Dec-2020 19:59:05
-%  @brief    Simple digital low-pass filter design and test
+%  @brief    Simple FIR digital low-pass filter design and test
 %
 % ************************************************************************
 %
+close all; clc;
+clear variables;
 %% TEST SIGNAL
 % sample time & freq
 ts = 0.001; % [s]
@@ -100,19 +102,21 @@ subplot(2,2,1)
   title('Orginal test signal time series');
   hold off;
 subplot(2,2,2)
-  ax = plotyy(fxvec, Axvec, ...
-              fhvec, Ahvec_v1, ...
-              @plot, @plot); hold on; grid on;
-  xlabel("Frequency [Hz]");
-  ylabel(ax(1), "Amplitude spectrum [-]");
-  ylabel(ax(2), "Amplitude response [dB]"); 
-  plot([f1 f1], AdBminmax, 'k--');
-  plot([f2 f2], AdBminmax, 'k--'); 
-  set(ax(1),'YLim', [0 0.51*3.3], 'XLim', fminmax);
-  set(ax(2),'YLim', AdBminmax, 'XLim', fminmax);
-  set(ax(2),'XTick',[], 'xcolor',[1 1 1]);
-  title('Original test signal ampltitude spectrum');
-  hold off;
+  yyaxis left
+    plot(fxvec, Axvec, '-');
+    xlabel("Frequency [Hz]");
+    ylabel("Amplitude spectrum [-]");
+    set(gca,'YLim', [0 0.51*3.3], 'XLim', fminmax);
+    hold on;
+    grid on;
+  yyaxis right
+    plot(fhvec, Ahvec_v1, '-');
+    ylabel("Amplitude response [dB]"); 
+    plot([f1 f1], AdBminmax, 'k--');
+    plot([f2 f2], AdBminmax, 'k--'); 
+    set(gca,'YLim', AdBminmax, 'XLim', fminmax);
+    title('Original test signal ampltitude spectrum');
+    hold off;
 subplot(2,2,3)
   plot(nvec/fs, xfvec, 'b'); grid on; hold on;
   xlabel("Time [s]");
@@ -121,19 +125,20 @@ subplot(2,2,3)
   title('Filtered test signal time series');
   hold off;
 subplot(2,2,4)
-  ax = plotyy(fxvec, Axfvec, ...
-              fhvec, Ahvec_v2, ...
-              @plot, @plot); hold on; grid on;
-  xlabel("Frequency [Hz]");
-  ylabel(ax(1), "Amplitude spectrum [-]");
-  ylabel(ax(2), "Amplitude response [dB]"); 
-  plot([f1 f1], AdBminmax, 'k--');
-  plot([f2 f2], AdBminmax, 'k--'); 
-  set(ax(1),'YLim', [0 0.51*3.3], 'XLim', fminmax);
-  set(ax(2),'YLim', AdBminmax, 'XLim', fminmax);
-  set(ax(2),'XTick',[], 'xcolor',[1 1 1]);
-  title('Filtered test signal ampltitude spectrum');
-  hold off;
+  yyaxis left
+    plot(fxvec, Axfvec, '-');
+    xlabel("Frequency [Hz]");
+    ylabel("Amplitude spectrum [-]");
+    set(gca, 'YLim', [0 0.51*3.3], 'XLim', fminmax);
+    hold on; grid on
+  yyaxis right
+    plot(fhvec, Ahvec_v2, '-');  
+    ylabel("Amplitude response [dB]"); 
+    plot([f1 f1], AdBminmax, 'k--');
+    plot([f2 f2], AdBminmax, 'k--'); 
+    set(gca, 'YLim', AdBminmax, 'XLim', fminmax);
+    title('Filtered test signal ampltitude spectrum');
+    hold off;
   
 %% EXPORT FILTER TO .C/.H FILES
 generate_fir('FIR1', b, 1);

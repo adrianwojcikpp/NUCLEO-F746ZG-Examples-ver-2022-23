@@ -1,0 +1,12 @@
+/* MATLAB GENERATED SOURCE FILE: PID1_pid.c */
+#include "PID1_pid.h"
+// Controller gains
+uint32_t PID1_GAINS_UINT[3] = 
+{
+  #include "PID1_gains.csv"
+};
+float32_t PID1_KP = ((float32_t*)PID1_GAINS_UINT)[0];
+float32_t PID1_KI = ((float32_t*)PID1_GAINS_UINT)[1];
+float32_t PID1_KD = ((float32_t*)PID1_GAINS_UINT)[2];
+// Controller instance
+arm_pid_instance_f32 PID1;

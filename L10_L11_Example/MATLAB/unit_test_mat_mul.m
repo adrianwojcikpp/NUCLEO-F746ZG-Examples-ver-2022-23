@@ -1,5 +1,4 @@
 %% Matrix multiplication unit test
-
 %%% File info 
 %
 % ************************************************************************
@@ -14,8 +13,8 @@
 % ************************************************************************
 %
 close all; clc;
-clear A x y
-%% Matrix multiplication
+clear A B C_REF
+%% MATRIX MULTIPLICATION
 
 A = single(rand(3,3));
 B = single(rand(3,1));
@@ -30,9 +29,8 @@ disp(B);
 disp("REFERENCE RESULT:");
 disp(C_REF);
 
-%% Export files
+%% EXPORT MATRICES TO .C/.H FILES
 generate_mat('A', A);
 generate_mat('B', B);
 generate_mat('C', zeros(size(C_REF)));
 generate_mat('C_REF', C_REF);
-

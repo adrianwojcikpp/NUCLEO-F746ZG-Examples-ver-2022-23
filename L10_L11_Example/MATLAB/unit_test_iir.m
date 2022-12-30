@@ -3,7 +3,7 @@
 %
 % *************************************************************************
 %
-%  @file     unit_test_biquad.m
+%  @file     unit_test_iir.m
 %  @author   Adrian Wojcik
 %  @version  2.0
 %  @date     17-Dec-2019 10:33:27

@@ -4,19 +4,32 @@
 #include "CuTest.h"
 #include "arm_math.h"
 
-#define len(x) (sizeof(x)/sizeof(x[0]))
+#define LEN(x) (sizeof(x)/sizeof(x[0]))
+
+/**
+ * @brief Root mean square error
+ * @param[in] yref : Reference vector
+ * @param[in] y    : Input vector
+ * @param[in] len  : Vectors length
+ * @return Root mean square error: sqrt(sum( (yref - y)^2 ))
+ */
+float32_t RMSE(const float32_t* y, const float32_t* yref, const uint32_t len)
+{
+  float32_t err[len];
+  arm_sub_f32(yref, y, err, len);
+  float32_t rmse;
+  arm_rms_f32(err, len, &rmse);
+  return rmse;
+}
 
 void TestCmsisDsp_RMSE(CuTest *tc)
 {
   const float32_t a[] = { 0.8150f, 0.9060f, 0.1270f };
   const float32_t b[] = { 0.9130f, 0.6320f, 0.0980f };
-  float32_t a_minus_b[len(a)];
-  float32_t c;
   const float32_t c_ref = 0.1688402f;
 
   // CMSIS DSP implementation of root mean square error
-  arm_sub_f32(a, b, a_minus_b, len(a_minus_b));
-  arm_rms_f32(a_minus_b, len(a_minus_b), &c);
+  float32_t c = RMSE(a, b, 3);
 
   CuAssertDblEquals(tc, c_ref, c, 1e-7f);
 }
@@ -37,10 +50,7 @@ void TestCmsisDsp_MAT_MULT(CuTest *tc)
 
   CuAssertIntEquals(tc, ARM_MATH_SUCCESS, status);
 
-  float32_t err[C_ROWS*C_COLS];
-  arm_sub_f32(C.pData, (float32_t*)C_REF_DATA, err, C_ROWS*C_COLS);
-  float32_t rmse;
-  arm_rms_f32(err, C_ROWS*C_COLS, &rmse);
+  float32_t rmse = RMSE((float32_t*)C_REF_DATA, C.pData, C_ROWS*C_COLS);
 
   CuAssertDblEquals(tc, 0.0f, rmse, 1e-7f);
 }
@@ -73,10 +83,7 @@ void TestCmsisDsp_FIR(CuTest *tc)
     #endif
   }
 
-  float32_t err[Y1_LEN];
-  arm_sub_f32(Y1, Y1_REF, err, Y1_LEN);
-  float32_t rmse;
-  arm_rms_f32(err, Y1_LEN, &rmse);
+  float32_t rmse = RMSE(Y1_REF, Y1, Y1_LEN);
 
   CuAssertDblEquals(tc, 0.0f, rmse, 1e-6f);
 }
@@ -108,10 +115,7 @@ void TestCmsisDsp_IIR(CuTest *tc)
     #endif
   }
 
-  float32_t err[Y2_LEN];
-  arm_sub_f32(Y2, Y2_REF, err, Y2_LEN);
-  float32_t rmse;
-  arm_rms_f32(err, Y2_LEN, &rmse);
+  float32_t rmse = RMSE(Y2_REF, Y2, Y2_LEN);
 
   CuAssertDblEquals(tc, 0.0f, rmse, 1e-4f);
 }
@@ -152,10 +156,7 @@ void TestCmsisDsp_PID(CuTest *tc)
     #endif
   }
 
-  float32_t err[Y3_LEN];
-  arm_sub_f32(Y3, Y3_REF, err, Y3_LEN);
-  float32_t rmse;
-  arm_rms_f32(err, Y3_LEN, &rmse);
+  float32_t rmse = RMSE(Y3_REF, Y3, Y3_LEN);
 
   CuAssertDblEquals(tc, 0.0f, rmse, 1e-10f);
 }
@@ -163,15 +164,15 @@ void TestCmsisDsp_PID(CuTest *tc)
 
 CuSuite* CuGetCmsisDspSuite(void)
 {
-	CuSuite* suite = CuSuiteNew();
+  CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, TestCmsisDsp_RMSE);
-	// L10: CMSIS DSP pt. 1
-	SUITE_ADD_TEST(suite, TestCmsisDsp_MAT_MULT);
+  SUITE_ADD_TEST(suite, TestCmsisDsp_RMSE);
+  // L10: CMSIS DSP pt. 1
+  SUITE_ADD_TEST(suite, TestCmsisDsp_MAT_MULT);
   SUITE_ADD_TEST(suite, TestCmsisDsp_FIR);
   // L11: CMSIS DSP pt. 2
   //SUITE_ADD_TEST(suite, TestCmsisDsp_IIR);
   //SUITE_ADD_TEST(suite, TestCmsisDsp_PID);
 
-	return suite;
+  return suite;
 }

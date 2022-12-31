@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 #include "usart.h"
+#include "tim.h"
 #include "dac.h"
 
 #include "aio.h"
@@ -32,7 +33,7 @@ void menu_dac_routine(MenuItem_TypeDef* hmenuitem, uint32_t channel, const char*
 
 /* Public variables ----------------------------------------------------------*/
 Menu_TypeDef hmenu = {
-  .Display = &hlcd1, .SerialPort = &huart3,
+  .Display = &hlcd1, .Timer = &htim11, .SerialPort = &huart3,
 };
 
 unsigned int ADC1_ConvResults_mV[16];

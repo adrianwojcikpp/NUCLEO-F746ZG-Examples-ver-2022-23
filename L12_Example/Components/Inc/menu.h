@@ -37,6 +37,7 @@ struct _MenuItem {
 
 #define MENU_DisplayType LCD_DIO_HandleTypeDef*
 #define MENU_SerialType UART_HandleTypeDef*
+#define MENU_TimerType TIM_HandleTypeDef*
 
 typedef struct {
   /* Menu structure */
@@ -44,6 +45,7 @@ typedef struct {
   _Bool ItemChanged;
   /* Output devices */
   MENU_DisplayType Display;
+  MENU_TimerType Timer;
   MENU_SerialType SerialPort;
 } Menu_TypeDef;
 

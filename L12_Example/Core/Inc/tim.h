@@ -31,7 +31,6 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 extern TIM_HandleTypeDef* htim_disp;
 extern TIM_HandleTypeDef* htim_inputs;
-extern TIM_HandleTypeDef* htim_menu;
 /* USER CODE END Includes */
 
 extern TIM_HandleTypeDef htim2;

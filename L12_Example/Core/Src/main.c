@@ -89,7 +89,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     DISP_DIO_ROUTINE(&hdisp1);
   }
-  else if(htim == htim_menu)
+  else if(htim == hmenu.Timer)
   {
     if(BTN_DIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE && hmenu.Item->Next != NULL)
     {
@@ -215,7 +215,7 @@ int main(void)
 
   HAL_TIM_Base_Start_IT(htim_disp);
   HAL_TIM_Base_Start_IT(htim_inputs);
-  HAL_TIM_Base_Start_IT(htim_menu);
+  HAL_TIM_Base_Start_IT(hmenu.Timer);
   /* USER CODE END 2 */
 
   /* Infinite loop */

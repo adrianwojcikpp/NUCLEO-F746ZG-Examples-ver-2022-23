@@ -168,11 +168,11 @@ CuSuite* CuGetCmsisDspSuite(void)
 
   SUITE_ADD_TEST(suite, TestCmsisDsp_RMSE);
   // L10: CMSIS DSP pt. 1
-  SUITE_ADD_TEST(suite, TestCmsisDsp_MAT_MULT);
-  SUITE_ADD_TEST(suite, TestCmsisDsp_FIR);
+  //SUITE_ADD_TEST(suite, TestCmsisDsp_MAT_MULT);
+  //SUITE_ADD_TEST(suite, TestCmsisDsp_FIR);
   // L11: CMSIS DSP pt. 2
-  //SUITE_ADD_TEST(suite, TestCmsisDsp_IIR);
-  //SUITE_ADD_TEST(suite, TestCmsisDsp_PID);
+  SUITE_ADD_TEST(suite, TestCmsisDsp_IIR);
+  SUITE_ADD_TEST(suite, TestCmsisDsp_PID);
 
   return suite;
 }

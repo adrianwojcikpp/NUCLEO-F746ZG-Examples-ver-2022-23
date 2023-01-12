@@ -166,5 +166,5 @@ subplot(2,2,4)
 
 %% SAVE TEST DATA TO .C/.H AND .CSV FILES
 generate_vec('X2', xvec);
-generate_vec('Y2', zeros(size(xfvec_v2)));
-generate_vec('Y2_REF', xfvec_v2);
+generate_vec('Y2', zeros(size(xfvec_v1)));
+generate_vec('Y2_REF', xfvec_v1);

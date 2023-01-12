@@ -25,18 +25,11 @@ tmax = 1;   % [s]
 tvec = (0 : ts : tmax-ts)';
 
 % sample vector
-nvec = 0 : length(tvec)-1;
+nvec = (0 : length(tvec)-1)';
 
 % test signal - square wave
-T = 0.1; % [s] signal period
-refvec = single(zeros(size(tvec)));
-for i = nvec+1
-    if mod(i*ts,T) < T/2
-       refvec(i) = 3.3;
-    else
-       refvec(i) = 0.0; 
-    end%if
-end%for
+Tref = 0.1; % [s] signal period
+refvec = (3.3/2)*(square(2*pi*tvec/Tref) + 1);
 
 %% Test plant model
 
@@ -75,7 +68,8 @@ outvec = lsim(S_out,refvec,tvec);
 controlvec = lsim(S_pid,refvec,tvec);
 errvec = refvec - outvec;
 
-pid_out_v1 = controlvec;
+% Control signal: MATLAB lsim built-in function
+pid_out_v1 = controlvec; 
 
 %% EXPORT FILTER TO .C/.H FILES
 [Kp2, Ki2, Kd2] = generate_pid('PID1', Kp, Ki, Kd, ts);
@@ -124,26 +118,24 @@ for n = 3 : length(tvec)                          % n >= 3
     
 end
 
-pid_in = x;
+% Control signal: for-loop implementation (explicit form)
 pid_out_v21 = y1;
+% Control signal: for-loop implementation (CMSIS DSP form)
 pid_out_v22 = y2;
 
 %% RESULT PLOT
-OFFSET = 0;
-
 hold on;
-    stairs(tvec, outvec); 
-    stairs(tvec, refvec); 
-    stairs(tvec, pid_out_v1  + OFFSET);
-    stairs(tvec, pid_out_v21 + OFFSET);
-    stairs(tvec, pid_out_v22 + OFFSET);
+    stairs(tvec, outvec, 'DisplayName', 'OUT'); 
+    stairs(tvec, refvec, 'DisplayName', 'REF'); 
+    stairs(tvec, pid_out_v1,  'DisplayName', 'CONTROL (lsim)');
+    stairs(tvec, pid_out_v21, 'DisplayName', 'CONTROL (for loop EXPLICIT)');
+    stairs(tvec, pid_out_v22, 'DisplayName', 'CONTROL (for loop CMSIS)');
 grid on;
 hold off;
 xlabel('Time [s]');
-legend('OUT', 'REF', 'CONTROL (lsim)', 'CONTROL (for loop EXPLICIT)', ...
-                               'CONTROL (for loop CMSIS)');
+legend();
 
 %% SAVE TEST DATA TO .C/.H AND .CSV FILES
-generate_vec('X3', pid_in);
+generate_vec('X3', errvec);
 generate_vec('Y3', zeros(size(pid_out_v22)));
 generate_vec('Y3_REF', pid_out_v22);

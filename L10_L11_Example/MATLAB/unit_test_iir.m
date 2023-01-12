@@ -28,15 +28,8 @@ tvec = 0 : ts : tmax-ts;
 nvec = 0 : length(tvec)-1;
 
 % test signal - square wave
-T = 0.1; % [s] signal period
-xvec = single(zeros(size(tvec)));
-for i = nvec+1
-    if mod(i*ts,T) < T/2
-       xvec(i) = 3.3;
-    else
-       xvec(i) = 0.0; 
-    end%if
-end%for
+Tx = 0.1; % [s] signal period
+xvec = (3.3/2)*(square(2*pi*tvec/Tx) + 1);
 
 % test signal amplitude spectrum
 % frequency vector
@@ -60,12 +53,16 @@ e = 0.7;    % [-]
 G = 1 / (1 + 2*e*s/w + s^2 / w^2);
 
 % -- DISCRETIZATION -------------------------------------------------------
-%[b,a] = cheby1(N,R,Wp,'low');
 H = c2d(G,ts, 'zoh');
 
+% -- DISCRETE FILTER ------------------------------------------------------
+%[b,a] = cheby1(N,R,Wp,'low');
+
 % -- FILTER RESPONSE COMPUTING --------------------------------------------
-%xfvec_v1 = filter(b,a,xvec);
-xfvec_v1 = lsim(H,xvec,tvec)';
+% filtered signal time series: MATLAB filter built-in function
+%xfvec_v1 = filter(b,a,xvec); 
+% filtered signal time series: MATLAB lsim built-in function
+xfvec_v1 = lsim(H,xvec,tvec)'; 
 
 % Filter frequency response
 % no. of samples
@@ -106,6 +103,7 @@ if length(biquad_coeffs) == 1
                          + a1 * y(n-1) + a2 * y(n-2);
     end
     
+    % filtered signal time series: for-loop implementation (CMSIS DSP form)
     xfvec_v2 = y;
     
     % filtered signal amplitude spectrum
@@ -168,5 +166,5 @@ subplot(2,2,4)
 
 %% SAVE TEST DATA TO .C/.H AND .CSV FILES
 generate_vec('X2', xvec);
-generate_vec('Y2', zeros(size(xfvec_v1)));
-generate_vec('Y2_REF', xfvec_v1);
+generate_vec('Y2', zeros(size(xfvec_v2)));
+generate_vec('Y2_REF', xfvec_v2);

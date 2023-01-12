@@ -28,15 +28,8 @@ tvec = 0 : ts : tmax-ts;
 nvec = 0 : length(tvec)-1;
 
 % test signal - square wave
-T = 0.1; % [s] signal period
-xvec = zeros(size(tvec));
-for i = nvec+1
-    if mod(i*ts,T) < T/2
-       xvec(i) = 3.3;
-    else
-       xvec(i) = 0.0; 
-    end%if
-end%for
+Tx = 0.1; % [s] signal period
+xvec = (3.3/2)*(square(2*pi*tvec/Tx) + 1);
 
 % test signal amplitude spectrum
 % frequency vector

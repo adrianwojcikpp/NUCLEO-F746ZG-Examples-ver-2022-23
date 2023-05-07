@@ -32,6 +32,8 @@ typedef struct {
  BMP2_CS_PinType  CS_Pin;
  int8_t           LastExecutionStatus;
  uint16_t         MaxRetry;
+ float ReadoutTemp;
+ float ReadoutPress;
 } BMP2_HandleTypeDef;
 
 /* Define --------------------------------------------------------------------*/
@@ -44,6 +46,10 @@ typedef struct {
 #define BMP2_NUM_OF_SENSORS   2
 
 /* Macro ---------------------------------------------------------------------*/
+#define BMP2_GET_PRESS(dev)  ((BMP2_HandleTypeDef*)((dev)->intf_ptr))->ReadoutPress
+#define BMP2_GET_TEMP(dev)   ((BMP2_HandleTypeDef*)((dev)->intf_ptr))->ReadoutTemp
+#define BMP2_GET_STATUS(dev) ((BMP2_HandleTypeDef*)((dev)->intf_ptr))->LastExecutionStatus
+#define BMP2_GET_MAX_RETRY(dev) ((BMP2_HandleTypeDef*)((dev)->intf_ptr))->MaxRetry
 
 /* Public variables ----------------------------------------------------------*/
 extern struct bmp2_dev bmp2dev_1;
@@ -139,5 +145,3 @@ double BMP2_ReadTemperature_degC(struct bmp2_dev *dev);
 double BMP2_ReadPressure_hPa(struct bmp2_dev *dev);
 
 #endif /* INC_BMP2_CONFIG_H_ */
-
-

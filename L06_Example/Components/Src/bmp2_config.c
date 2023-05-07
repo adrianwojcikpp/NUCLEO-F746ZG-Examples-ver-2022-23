@@ -16,6 +16,7 @@
 #include "bmp2_config.h"
 
 #include <string.h>
+#include <math.h>
 
 /* Typedef -------------------------------------------------------------------*/
 
@@ -26,8 +27,8 @@
 /* Private variables ---------------------------------------------------------*/
 BMP2_HandleTypeDef hbmp2_1 = {
   .SPI = &hspi4,
-  .CS_Port = SPI4_CS_GPIO_Port,
-  .CS_Pin = SPI4_CS_Pin,
+  .CS_Port = BMP2_CS1_GPIO_Port,
+  .CS_Pin = BMP2_CS1_Pin,
   .MaxRetry = 10
 };
 
@@ -71,7 +72,7 @@ int8_t BMP2_Init(struct bmp2_dev* dev)
 
   /* Configuring the over-sampling mode, filter coefficient and output data rate */
   /* Overwrite the desired settings */
-  conf.filter = BMP2_FILTER_OFF;
+  conf.filter = BMP2_FILTER_COEFF_8;
   /* Over-sampling mode is set as ultra low resolution i.e., os_pres = 1x and os_temp = 1x */
   conf.os_mode = BMP2_OS_MODE_ULTRA_LOW_POWER;
   /* Setting the output data rate */
@@ -119,11 +120,6 @@ BMP2_INTF_RET_TYPE bmp2_spi_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t l
   /* Disable selected slaves */
   HAL_GPIO_WritePin(hbmp2->CS_Port, hbmp2->CS_Pin, GPIO_PIN_SET);
 
-#ifdef DEBUG
-  uint8_t data[BMP2_SPI_BUFFER_LEN] = {0,};
-  memcpy(data, reg_data, length);
-#endif
-
   // The BMP2xx API calls for 0 return value as a success, and -1 returned as failure
   if (status != HAL_OK)
     iError = -1;
@@ -151,11 +147,6 @@ BMP2_INTF_RET_TYPE bmp2_spi_write(uint8_t reg_addr, const uint8_t *reg_data, uin
   HAL_StatusTypeDef status = HAL_OK;
   int8_t iError = BMP2_INTF_RET_SUCCESS;
   BMP2_HandleTypeDef* hbmp2 = (BMP2_HandleTypeDef*)intf_ptr;
-
-#ifdef DEBUG
-  uint8_t data[BMP2_SPI_BUFFER_LEN] = {0,};
-  memcpy(data, reg_data, length);
-#endif
 
   /* Software slave selection procedure */
   HAL_GPIO_WritePin(hbmp2->CS_Port, hbmp2->CS_Pin, GPIO_PIN_RESET);
@@ -206,7 +197,7 @@ int8_t BMP2_ReadData(struct bmp2_dev *dev, double* press, double* temp)
   int8_t rslt = BMP2_E_NULL_PTR;
   struct bmp2_status status;
   struct bmp2_data comp_data;
-  int8_t try = 10;
+  int8_t try = BMP2_GET_MAX_RETRY(dev);
 
   do {
     /* Read sensor status */
@@ -219,7 +210,9 @@ int8_t BMP2_ReadData(struct bmp2_dev *dev, double* press, double* temp)
   } while (status.measuring != BMP2_MEAS_DONE && try > 0);
 
   /* Save reading result in sensor handler */
-  ((BMP2_HandleTypeDef*)(dev->intf_ptr))->LastExecutionStatus = rslt;
+  BMP2_GET_PRESS(dev) = *press;
+  BMP2_GET_TEMP(dev) = *temp;
+  BMP2_GET_STATUS(dev) = rslt;
 
   return rslt;
 }
@@ -235,8 +228,8 @@ double BMP2_ReadTemperature_degC(struct bmp2_dev *dev)
   int8_t rslt = BMP2_E_NULL_PTR;
   struct bmp2_status status;
   struct bmp2_data comp_data;
-  double temp = -1.0;
-  int8_t try = 10;
+  double temp = NAN;
+  int8_t try = BMP2_GET_MAX_RETRY(dev);
 
   do {
     /* Read sensor status */
@@ -248,7 +241,8 @@ double BMP2_ReadTemperature_degC(struct bmp2_dev *dev)
   } while (status.measuring != BMP2_MEAS_DONE && try > 0);
 
   /* Save reading result in sensor handler */
-  ((BMP2_HandleTypeDef*)(dev->intf_ptr))->LastExecutionStatus = rslt;
+  BMP2_GET_TEMP(dev) = temp;
+  BMP2_GET_STATUS(dev) = rslt;
 
   return temp;
 }
@@ -264,8 +258,8 @@ double BMP2_ReadPressure_hPa(struct bmp2_dev *dev)
   int8_t rslt = BMP2_E_NULL_PTR;
   struct bmp2_status status;
   struct bmp2_data comp_data;
-  double press = -1.0;
-  int8_t try = 10;
+  double press = NAN;
+  int8_t try = BMP2_GET_MAX_RETRY(dev);
 
   do {
     /* Read sensor status */
@@ -277,7 +271,8 @@ double BMP2_ReadPressure_hPa(struct bmp2_dev *dev)
   } while (status.measuring != BMP2_MEAS_DONE && try > 0);
 
   /* Save reading result in sensor handler */
-  ((BMP2_HandleTypeDef*)(dev->intf_ptr))->LastExecutionStatus = rslt;
+  BMP2_GET_PRESS(dev) = press;
+  BMP2_GET_STATUS(dev) = rslt;
 
   return press;
 }

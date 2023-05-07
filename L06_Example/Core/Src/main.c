@@ -99,18 +99,15 @@ int main(void)
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
   BMP2_Init(&bmp2dev_1);
-  LED_PWM_Init(&hld4);
-  HEATER_PWM_Init(&hheater);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HEATER_PWM_WriteDuty(&hheater, duty);
     temp = BMP2_ReadTemperature_degC(&bmp2dev_1);
     char msg[32] = { 0, };
-    int msg_len = sprintf(msg, "%d, %d.%d degC\r\n", (int)HEATER_PWM_ReadDuty(&hheater), (int)temp, (int)(100.0f*temp)%100);
+    int msg_len = sprintf(msg, "%d.%d degC\r\n", (int)temp, (int)(100.0f*temp)%100);
     HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
     HAL_Delay(1000);
     /* USER CODE END WHILE */

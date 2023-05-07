@@ -1,8 +1,0 @@
-/* MATLAB GENERATED HEADER FILE: B_mat.c */
-#include "B_mat.h"
-uint32_t B_DATA[B_ROWS*B_COLS] = 
-{
-  #include "B.csv"
-};
-arm_matrix_instance_f32 B;
-

@@ -125,7 +125,7 @@ void TestCmsisDsp_IIR(CuTest *tc)
 #include "Y3_vec.h"
 #include "Y3_REF_vec.h"
 
-#define USE_SWV_PID 1
+#define USE_SWV_PID 0
 
 #if USE_SWV_PID
 float32_t SWV_PID1;

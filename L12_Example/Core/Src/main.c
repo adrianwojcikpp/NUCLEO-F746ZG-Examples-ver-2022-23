@@ -61,6 +61,8 @@ extern unsigned int ADC1_ConvResults_mV[16];
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t RxData[8];
+const uint16_t RX_DATA_LEN = 3;
 uint16_t ADC1_DATA[16];
 arm_fir_instance_f32 fir[2];
 const uint32_t fir_coeffs[] = {
@@ -147,6 +149,23 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
   }
 }
 
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == hmenu.SerialPort)
+  {
+	 int dac_value;
+	 int n = sscanf((uint8_t*)RxData, "%x", &dac_value);
+	 if(n == 1)
+		 HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_value);
+	 HAL_UART_Receive_IT(hmenu.SerialPort, RxData, RX_DATA_LEN);
+  }
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -216,6 +235,8 @@ int main(void)
   HAL_TIM_Base_Start_IT(htim_disp);
   HAL_TIM_Base_Start_IT(htim_inputs);
   HAL_TIM_Base_Start_IT(hmenu.Timer);
+
+  HAL_UART_Receive_IT(hmenu.SerialPort, RxData, RX_DATA_LEN);
   /* USER CODE END 2 */
 
   /* Infinite loop */

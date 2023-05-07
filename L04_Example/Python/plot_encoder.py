@@ -36,18 +36,22 @@ if __name__ == '__main__':
     # Default values
     port = 'COM1'
     baud = 9600
+    input_field = 'encoder'
 
     # Parse command line arguments
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'p:b:', ['port=', 'baud='])
+        opts, args = getopt.getopt(sys.argv[1:], 'p:b:i:', ['port=', 'baud=', 'input='])
     except getopt.GetoptError:
-        print('Usage: plot_serial.py -p <port> -b <baud>')
+        print('Usage: plot_serial.py -p <port> -b <baud> -i <input>')
         sys.exit(2)
     for opt, arg in opts:
         if opt in ('-p', '--port'):
             port = arg
         elif opt in ('-b', '--baud'):
             baud = int(arg)
+        elif opt in ('-i', '--input'):
+            input_field = arg
+
     
     print(f'Listening on serial port {port} at {baud} baud')
 
@@ -58,7 +62,7 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
     ax.grid(True)
     ax.set_xlabel('Sample Number')
-    ax.set_ylabel('Encoder Value')
+    ax.set_ylabel(input_field.capitalize()+ ' Value')
     xdata, ydata = [], []
     line, = ax.plot(xdata, ydata)
 
@@ -75,15 +79,16 @@ if __name__ == '__main__':
             continue
         
         # Check if JSON contains encoder value
-        if 'encoder' in data:
+        if input_field in data:
             # Update plot
-            encoder_val = data['encoder']
+            print(data)
+            encoder_val = data[input_field ]
             xdata.append(sample_num)
             ydata.append(encoder_val)
             line.set_data(xdata, ydata)
             ax.relim()
             ax.autoscale_view(True,True,True)
             plt.draw()
-            plt.pause(0.1)
+            plt.pause(0.05)
             sample_num += 1
 

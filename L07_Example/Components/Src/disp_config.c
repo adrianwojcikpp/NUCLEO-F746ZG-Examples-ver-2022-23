@@ -22,7 +22,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-DISP_HandleTypeDef hdisp1 = {
+DISP_HandleTypeDef hdisp1;/* = {
   // Display GPIO ports and pins
   .SegmentOutput = {
       DIO_INIT_HANDLE(DISP_A),
@@ -43,7 +43,7 @@ DISP_HandleTypeDef hdisp1 = {
   // Display data
   .DataArray = {0, 0, 0, 0},
   .DecimalPoint = DISP_DP_1
-};
+};*/
 
 /* Private function prototypes -----------------------------------------------*/
 

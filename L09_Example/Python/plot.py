@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button
 from light_control import *
 
-nucleo = LightControl('COM22')
+nucleo = LightControl('COM14')
 
 t = []
 x = []

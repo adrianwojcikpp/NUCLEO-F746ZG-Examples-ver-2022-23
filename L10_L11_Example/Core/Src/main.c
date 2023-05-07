@@ -18,12 +18,16 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "arm_math.h"
+#include "IIR2_biquad_df1.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,7 +47,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+float input, output;
+uint16_t output_uint;
+char RxMsg[16];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -54,7 +60,38 @@ void RunAllTests(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/**
+  * @brief  Period elapsed callback in non-blocking mode
+  * @param  htim TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim == &htim7)
+  {
+	HAL_ADC_Start(&hadc1);
+	if(HAL_ADC_PollForConversion(&hadc1, 1) == HAL_OK)
+		input = (float)HAL_ADC_GetValue(&hadc1);
+	arm_biquad_cascade_df1_f32(&IIR2, &input, &output, 1);
+	output_uint = (uint16_t)output;
+  }
 
+}
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart3)
+  {
+	float value;
+    sscanf(RxMsg, "%f", &value);
+	HAL_UART_Receive_IT(&huart3, (unsigned char*)RxMsg, 7);
+  }
+}
 /* USER CODE END 0 */
 
 /**
@@ -86,8 +123,13 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART3_UART_Init();
+  MX_ADC1_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   RunAllTests();
+  arm_biquad_cascade_df1_init_f32(&IIR2, IIR2_NUM_STAGES, IIR2_COEFFS, IIR2_STATE);
+  HAL_TIM_Base_Start_IT(&htim7);
+  HAL_UART_Receive_IT(&huart3, (unsigned char*)RxMsg, 7);
   /* USER CODE END 2 */
 
   /* Infinite loop */

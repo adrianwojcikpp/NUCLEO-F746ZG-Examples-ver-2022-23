@@ -1,8 +1,0 @@
-/* MATLAB GENERATED HEADER FILE: C_REF_mat.c */
-#include "C_REF_mat.h"
-uint32_t C_REF_DATA[C_REF_ROWS*C_REF_COLS] = 
-{
-  #include "C_REF.csv"
-};
-arm_matrix_instance_f32 C_REF;
-

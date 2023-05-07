@@ -1,0 +1,187 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * File Name          : freertos.c
+  * Description        : Code for freertos applications
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "fatfs.h"
+#include "sdmmc.h"
+#include <stdio.h>
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+/* USER CODE BEGIN Variables */
+
+/* USER CODE END Variables */
+osThreadId defaultTaskHandle;
+
+/* Private function prototypes -----------------------------------------------*/
+/* USER CODE BEGIN FunctionPrototypes */
+
+/* USER CODE END FunctionPrototypes */
+
+void StartDefaultTask(void const * argument);
+
+void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+
+/* GetIdleTaskMemory prototype (linked to static allocation support) */
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize );
+
+/* USER CODE BEGIN GET_IDLE_TASK_MEMORY */
+static StaticTask_t xIdleTaskTCBBuffer;
+static StackType_t xIdleStack[configMINIMAL_STACK_SIZE];
+
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer, StackType_t **ppxIdleTaskStackBuffer, uint32_t *pulIdleTaskStackSize )
+{
+  *ppxIdleTaskTCBBuffer = &xIdleTaskTCBBuffer;
+  *ppxIdleTaskStackBuffer = &xIdleStack[0];
+  *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+  /* place for user code */
+}
+/* USER CODE END GET_IDLE_TASK_MEMORY */
+
+/**
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* definition and creation of defaultTask */
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+}
+
+/* USER CODE BEGIN Header_StartDefaultTask */
+/**
+  * @brief  Function implementing the defaultTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_StartDefaultTask */
+void StartDefaultTask(void const * argument)
+{
+  /* USER CODE BEGIN StartDefaultTask */
+    /*
+     * TODO:
+     *  separate read and write files
+     *  comments and file content to English
+     *  remove all warnings - unused status variables can turn on red LED
+     */
+    FRESULT res;
+
+    res = f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, work, sizeof work);
+    res = f_mount(&SDFatFS, (TCHAR const*)SDPath, 0);
+    res = f_open(&SDFile, "A.TXT", FA_OPEN_ALWAYS | FA_OPEN_APPEND | FA_WRITE | FA_READ);
+    res = f_lseek(&SDFile, f_size(&SDFile));
+
+    // ustaiwnie wskaźnika zapisu/odczytu na początku pliku
+    FRESULT status_lseek = f_lseek(&SDFile, 0);
+
+    // przygotowanie buffora do którego zapiszemy dane
+    const uint32_t str_form_sd_len = 64;
+    char buffer_fom_sd[64] = {0};
+
+    // odczyt do '\n' znaku z pliku do buffora o maksymalnej długości str_form_sd_len
+    f_gets(buffer_fom_sd, str_form_sd_len, &SDFile);
+
+    // read specific number of bytes alternative.
+    // If the file needs to be read fast, it should be read in large chunk as possible.
+    f_lseek(&SDFile, 0);
+    uint16_t bytes_to_read = 10;
+    uint16_t bytes_read;
+    f_read(&SDFile, buffer_fom_sd, bytes_to_read, &bytes_read);
+
+    //gets the current read/write pointer of a file
+    uint32_t char_in_file = f_tell(&SDFile);
+
+    // ustawienie wskaźnika zapisu/odczytu na końcu pliku
+    f_lseek(&SDFile, f_size(&SDFile));
+
+    uint32_t counter = 0;
+    uint16_t sd_card_save_buff_size = 256;
+    char sd_card_save_buff[256];
+  /* Infinite loop */
+  for(;;)
+  {
+    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+
+    // zapis na kartę sd:
+    f_printf(&SDFile, "Demonstracyjny zapis na kartę SD (f_printf) %d \n", counter++);
+
+    uint16_t bytes_to_write = snprintf(sd_card_save_buff, sd_card_save_buff_size, "Demosntracyjny zapis na karte (f_write) %d \n", counter);
+    uint16_t number_of_bytes_writen = 0;
+    f_write(&SDFile, sd_card_save_buff, bytes_to_write, &number_of_bytes_writen);
+    f_sync(&SDFile);
+
+    osDelay(1000);
+  }
+  /* USER CODE END StartDefaultTask */
+}
+
+/* Private application code --------------------------------------------------*/
+/* USER CODE BEGIN Application */
+
+/* USER CODE END Application */
+

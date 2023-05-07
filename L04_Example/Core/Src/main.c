@@ -24,9 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "led_config.h"
-#include "btn_config.h"
-#include "encoder_config.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,8 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned int enc_cnt = 0;
-unsigned int duty_cycle = 50;
+unsigned char pData[32];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -58,6 +55,24 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart3)
+  {
+    int R, G, B;
+    sscanf((char*)pData, "%*c%2x%2x%2x", &R, &G, &B);
+    __HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_1, R);
+    __HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_3, G);
+    __HAL_TIM_SetCompare(&htim2, TIM_CHANNEL_4, B);
+    HAL_UART_Receive_IT(&huart3, pData, 7);
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -96,20 +111,13 @@ int main(void)
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
-  const unsigned int duty_cycle_values[] = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
-  const unsigned int duty_cycle_len = sizeof(duty_cycle_values) / sizeof(duty_cycle_values[0]);
-  unsigned int duty_cycle_cnt = 0;
+  HAL_UART_Receive_IT(&huart3, pData, 7);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    unsigned int arr = __HAL_TIM_GET_AUTORELOAD(&htim2);
-    duty_cycle = duty_cycle_values[duty_cycle_cnt];
-    duty_cycle_cnt = (duty_cycle_cnt < duty_cycle_len-1) ? (duty_cycle_cnt+1) : (0);
-    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_4, arr * duty_cycle / 100);
-    HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

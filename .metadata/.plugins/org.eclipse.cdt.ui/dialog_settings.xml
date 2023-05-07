@@ -23,6 +23,7 @@
 		<item key="caseSensitive" value="false"/>
 		<item key="searchFlags" value="131079"/>
 		<list key="previousPatterns">
+			<item value="HAL_TIM_Base_Start"/>
 			<item value="TIM_SR_UIF_Msk"/>
 			<item value="TIM_SR_UIF"/>
 			<item value="UIF"/>

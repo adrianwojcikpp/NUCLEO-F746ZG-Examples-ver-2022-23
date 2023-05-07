@@ -68,7 +68,7 @@ _Bool __jsmn_tok_keyvalue_cmp(const char *json, jsmntok_t *tok, const char *str,
 /* Public functions ----------------------------------------------------------*/
 /**
  * @brief Serial API LED control message reading
- * @note Control message syntax: [{"id":"LDx","status":x}, ... ,{"id":"LDx","status":x}]
+ * @note Control message syntax: [{"id":"LDx","state":x}, ... ,{"id":"LDx","state":x}]
  * 		 where x is either 0 (LED off) or 1 (LED on)
  * 		 LEDs IDs: Green on-board LED       : LD1
  * 		           Blue on-board LED        : LD2

@@ -19,7 +19,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
-#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -39,7 +38,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TASK 6
+#define TASK 4
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -105,19 +104,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 #endif
 
   }
-  if(htim == &htim6)
-  {
-    static int disp_input = 0;
 
-    if(BTN_DIO_EdgeDetected(&hbtn1) == BTN_PRESSED_EDGE)
-      disp_input = 0;
-
-    if(BTN_DIO_EdgeDetected(&hbtn2) == BTN_PRESSED_EDGE)
-      disp_input = 1;
-
-    DISP_printDecUInt(&hdisp1, (int)pot_volts[disp_input]);
-    DISP_ROUTINE(&hdisp1);
-  }
 }
 
 /**
@@ -184,12 +171,10 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
-  MX_DMA_Init();
   MX_ADC1_Init();
-  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_TIM_Base_Start_IT(&htim6);
+  //HAL_TIM_Base_Start_IT(&htim6);
   /* USER CODE END 2 */
 
   /* Infinite loop */

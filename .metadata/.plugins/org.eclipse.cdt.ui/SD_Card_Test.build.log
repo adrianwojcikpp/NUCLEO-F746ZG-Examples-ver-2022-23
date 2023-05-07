@@ -1,0 +1,53 @@
+15:27:08 **** Incremental Build of configuration Debug for project SD_Card_Test ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/freertos.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/freertos.d" -MT"Core/Src/freertos.o"  -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/freertos.o"
+../Core/Src/freertos.c: In function 'StartDefaultTask':
+../Core/Src/freertos.c:154:51: warning: passing argument 4 of 'f_read' from incompatible pointer type [-Wincompatible-pointer-types]
+  154 |     f_read(&SDFile, buffer_fom_sd, bytes_to_read, &bytes_read);
+      |                                                   ^~~~~~~~~~~
+      |                                                   |
+      |                                                   uint16_t * {aka short unsigned int *}
+In file included from ../FATFS/App/fatfs.h:26,
+                 from ../Core/Src/freertos.c:28:
+../Middlewares/Third_Party/FatFs/src/ff.h:244:54: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'uint16_t *' {aka 'short unsigned int *'}
+  244 | FRESULT f_read (FIL* fp, void* buff, UINT btr, UINT* br);   /* Read data from the file */
+      |                                                ~~~~~~^~
+../Core/Src/freertos.c:173:125: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  173 |     uint16_t bytes_to_write = snprintf(sd_card_save_buff, sd_card_save_buff_size, "Demosntracyjny zapis na karte (f_write) %d \n", counter);
+      |                                                                                                                            ~^      ~~~~~~~
+      |                                                                                                                             |      |
+      |                                                                                                                             int    uint32_t {aka long unsigned int}
+      |                                                                                                                            %ld
+../Core/Src/freertos.c:175:57: warning: passing argument 4 of 'f_write' from incompatible pointer type [-Wincompatible-pointer-types]
+  175 |     f_write(&SDFile, sd_card_save_buff, bytes_to_write, &number_of_bytes_writen);
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                                         |
+      |                                                         uint16_t * {aka short unsigned int *}
+In file included from ../FATFS/App/fatfs.h:26,
+                 from ../Core/Src/freertos.c:28:
+../Middlewares/Third_Party/FatFs/src/ff.h:245:61: note: expected 'UINT *' {aka 'unsigned int *'} but argument is of type 'uint16_t *' {aka 'short unsigned int *'}
+  245 | FRESULT f_write (FIL* fp, const void* buff, UINT btw, UINT* bw); /* Write data to the file */
+      |                                                       ~~~~~~^~
+../Core/Src/freertos.c:157:14: warning: unused variable 'char_in_file' [-Wunused-variable]
+  157 |     uint32_t char_in_file = f_tell(&SDFile);
+      |              ^~~~~~~~~~~~
+../Core/Src/freertos.c:140:13: warning: unused variable 'status_lseek' [-Wunused-variable]
+  140 |     FRESULT status_lseek = f_lseek(&SDFile, 0);
+      |             ^~~~~~~~~~~~
+../Core/Src/freertos.c:132:13: warning: variable 'res' set but not used [-Wunused-but-set-variable]
+  132 |     FRESULT res;
+      |             ^~~
+arm-none-eabi-gcc -o "SD_Card_Test.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\SD_Card_Test\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_Card_Test.map" -Wl,--gc-sections -static  -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: SD_Card_Test.elf
+ 
+arm-none-eabi-size   SD_Card_Test.elf 
+arm-none-eabi-objdump -h -S  SD_Card_Test.elf  > "SD_Card_Test.list"
+   text	   data	    bss	    dec	    hex	filename
+  76316	   2508	  35080	 113904	  1bcf0	SD_Card_Test.elf
+Finished building: default.size.stdout
+ 
+Finished building: SD_Card_Test.list
+ 
+
+15:27:10 Build Finished. 0 errors, 6 warnings. (took 1s.98ms)
+

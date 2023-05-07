@@ -37,7 +37,6 @@
      PE5   ------> SPI4_MISO
      PE6   ------> SPI4_MOSI
      PC1   ------> ETH_MDC
-     PC2   ------> ADCx_IN12
      PA1   ------> ETH_REF_CLK
      PA2   ------> ETH_MDIO
      PA3   ------> S_TIM5_CH4
@@ -47,7 +46,6 @@
      PA7   ------> ETH_CRS_DV
      PC4   ------> ETH_RXD0
      PC5   ------> ETH_RXD1
-     PB1   ------> ADCx_IN9
      PB10   ------> S_TIM2_CH3
      PB11   ------> S_TIM2_CH4
      PB13   ------> ETH_TXD1
@@ -141,12 +139,6 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = POTENTIOMETER2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(POTENTIOMETER2_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = EXT2_Btn_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
@@ -196,12 +188,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = POTENTIOMETER1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(POTENTIOMETER1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PFPin PFPin */
   GPIO_InitStruct.Pin = DISP_2_Pin|DISP_4_Pin;

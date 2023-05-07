@@ -109,7 +109,7 @@ int main(void)
     char msg[32] = { 0, };
     int msg_len = sprintf(msg, "%d.%d degC\r\n", (int)temp, (int)(100.0f*temp)%100);
     HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
-    HAL_Delay(1000);
+    HAL_Delay(250);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

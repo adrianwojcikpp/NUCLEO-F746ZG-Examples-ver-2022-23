@@ -1,0 +1,21 @@
+12:56:30 **** Incremental Build of configuration Debug for project PrintfTest ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:74:19: warning: unused variable 'x5' [-Wunused-variable]
+   74 |     long long int x5 = 1234567;
+      |                   ^~
+arm-none-eabi-gcc -o "PrintfTest.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\PP\Dydaktyka\MATERIALY\SM_MATERIALY\NUCLEO-F756ZG-Examples-ver-2022-23\PrintfTest\STM32F746ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PrintfTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: PrintfTest.elf
+ 
+arm-none-eabi-size   PrintfTest.elf 
+arm-none-eabi-objdump -h -S  PrintfTest.elf  > "PrintfTest.list"
+   text	   data	    bss	    dec	    hex	filename
+  18472	    140	   1852	  20464	   4ff0	PrintfTest.elf
+Finished building: default.size.stdout
+ 
+Finished building: PrintfTest.list
+ 
+
+12:56:31 Build Finished. 0 errors, 1 warnings. (took 780ms)
+

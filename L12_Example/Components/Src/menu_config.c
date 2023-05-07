@@ -132,14 +132,15 @@ void menu_uint_io_routine(MenuItem_TypeDef* hmenuitem, unsigned int value, unsig
   char temp_str[LCD_LINE_BUF_LEN];
   hmenuitem->DisplayStrLen = snprintf(temp_str, LCD_LINE_LEN, "%s: %*d %s", name, len, value, unit);
   MENU_ITEM_WriteDisplayBuffer(hmenuitem, temp_str); // Set display buffer
-  hmenuitem->SerialPortStrLen = 0;
+
+  hmenuitem->SerialPortStrLen = sprintf(hmenuitem->SerialPortStr, "%03x", (int)ADC_VOLTAGE2REG(value));
 }
 
 void menu_float_io_routine(MenuItem_TypeDef* hmenuitem, float value, unsigned int len, const char* name, const char* unit)
 {
   char temp_str[LCD_LINE_BUF_LEN];
   hmenuitem->DisplayStrLen = snprintf(temp_str, LCD_LINE_LEN, "%s: %*.2f%s", name, len, value, unit);
-  MENU_ITEM_WriteDisplayBuffer(hmenuitem, temp_str); // Set display buffer
+  MENU_ITEM_WriteDisplayBuffer(hmenuitem, temp_str); // Set display buffe
   hmenuitem->SerialPortStrLen = 0;
 }
 

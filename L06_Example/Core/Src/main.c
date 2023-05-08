@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <string.h>
 #include "led_config.h"
 #include "btn_config.h"
 #include "heater_config.h"
@@ -51,6 +52,7 @@
 /* USER CODE BEGIN PV */
 float duty = 100.0f;  // [%]
 float temp = 0.0f;    // [degC]
+unsigned char pwm_duty_msg[] = "000";
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,6 +63,21 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+/**
+  * @brief  Rx Transfer completed callback.
+  * @param  huart UART handle.
+  * @retval None
+  */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  if(huart == &huart3)
+  {
+	int pwm_duty = strtol(pwm_duty_msg, NULL, 10);
+	HEATER_PWM_WriteDuty(&hheater, pwm_duty);
+	HAL_UART_Receive_IT(&huart3, pwm_duty_msg, strlen(pwm_duty_msg));
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -99,6 +116,8 @@ int main(void)
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
   BMP2_Init(&bmp2dev_1);
+  HEATER_PWM_Init(&hheater);
+  HAL_UART_Receive_IT(&huart3, pwm_duty_msg, strlen(pwm_duty_msg));
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,9 +126,9 @@ int main(void)
   {
     temp = BMP2_ReadTemperature_degC(&bmp2dev_1);
     char msg[32] = { 0, };
-    int msg_len = sprintf(msg, "%d.%02d degC\r\n", (int)temp, (int)(100.0f*temp)%100);
+    int msg_len = sprintf(msg, "%d, %d.02%d degC\r\n", (int)HEATER_PWM_ReadDuty(&hheater), (int)temp, (int)(100.0f*temp)%100);
     HAL_UART_Transmit(&huart3, (uint8_t*)msg, msg_len, 100);
-    HAL_Delay(250);
+    HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
